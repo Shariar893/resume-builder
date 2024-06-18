@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div></div>;
+  return <div className="">smapel page</div>;
 };
 
 export default Page;
