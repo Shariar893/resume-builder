@@ -3,13 +3,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { ExperienceSchema } from "@/constants/schema";
-import { Experience } from "@/constants/types";
+import { SkillSchema } from "@/constants/schema";
+import { Skill } from "@/constants/types";
 
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -28,11 +34,11 @@ import {
 } from "@/components/responsive-model";
 
 const SkillsForm = () => {
-  const form = useForm<Experience>({
-    resolver: zodResolver(ExperienceSchema),
+  const form = useForm<Skill>({
+    resolver: zodResolver(SkillSchema),
   });
 
-  function onSubmit(data: Experience) {
+  function onSubmit(data: Skill) {
     console.log(data);
   }
 
@@ -42,26 +48,26 @@ const SkillsForm = () => {
         <ModelTrigger className="w-full">
           <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
             <Plus className="w-5 h-5" />
-            <p>Add a new item</p>
+            <p>Add a new skill</p>
           </div>
         </ModelTrigger>
 
         <ModelContent>
           <ModelHeader className="font-semibold text-xl">
-            Experience Section
+            Skill Section
           </ModelHeader>
           <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full md:px-1 mb-2 md:mb-1 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4"
+                className="w-full md:px-1 mb-2 md:mb-1 flex flex-col gap-4"
               >
                 <FormField
                   control={form.control}
-                  name="experience.company"
+                  name="skill.skillName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company Name</FormLabel>
+                      <FormLabel>Skill Name</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -75,88 +81,35 @@ const SkillsForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="experience.role"
+                  name="skill.level"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Role</FormLabel>
+                      <FormLabel>Skill Level</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          className="text-base"
-                          placeholder="Frontend Developer"
-                        />
+                        <Select
+                          onValueChange={field.onChange}
+                          disabled={field.disabled}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Skill Level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="beginner">Beginner</SelectItem>
+                            <SelectItem value="intermediate">
+                              Intermediate
+                            </SelectItem>
+                            <SelectItem value="advanced">Advanced</SelectItem>
+                            <SelectItem value="undefined">
+                              Hide Level
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="experience.startDate"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>Start Date</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className="text-base"
-                          placeholder=""
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="experience.endDate"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>End Date</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder=""
-                          className="text-base"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="experience.location"
-                  render={({ field }) => (
-                    <FormItem className="col-span-2">
-                      <FormLabel>Location</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder=""
-                          className="text-base"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="experience.description"
-                  render={({ field }) => (
-                    <FormItem className="col-span-2">
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea {...field} placeholder="" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <ModelFooter className="p-0 col-span-2">
                   <Button type="submit" className="w-full mt-2">
                     Save changes

@@ -1,14 +1,15 @@
 import * as z from "zod";
-import { EducationSchema, ExperienceSchema, ProfileSchema } from "./schema";
+import {
+  EducationSchema,
+  ExperienceSchema,
+  ProfileSchema,
+  SkillSchema,
+} from "./schema";
 export type Profile = z.infer<typeof ProfileSchema>;
 export type Education = z.infer<typeof EducationSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
+export type Skill = z.infer<typeof SkillSchema>;
 
-export type Skill = {
-  id: number;
-  name: string;
-  level?: number;
-};
 export type Project = {
   id: number;
   name: string;

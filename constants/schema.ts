@@ -38,3 +38,12 @@ export const ExperienceSchema = z.object({
     description: z.string().optional(),
   }),
 });
+
+export const SkillSchema = z.object({
+  id: z.number().optional(),
+  skill: z.object({
+    skillId: z.number().optional(),
+    skillName: z.string(),
+    level: z.string().optional(),
+  }),
+});
