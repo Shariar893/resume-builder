@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Profile } from "@/constants/types";
+import { Textarea } from "../ui/textarea";
 
 const ProfileForm = () => {
   const profile = useResumeStore((state) => state.profile);
@@ -132,7 +133,7 @@ const ProfileForm = () => {
             <FormItem className="sm:col-span-2">
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} className="h-20 py-0" />
+                <Textarea {...field} placeholder="" className="h-20" />
               </FormControl>
               <FormMessage />
             </FormItem>
