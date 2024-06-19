@@ -4,8 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { EducationSchema } from "@/constants/schema";
+import { Education } from "@/constants/types";
 
+import { Plus } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "../ui/textarea";
 import {
   Form,
   FormControl,
@@ -14,30 +18,22 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import { Input } from "@/components/ui/input";
-import { Education } from "@/constants/types";
-
-import { Plus } from "lucide-react";
 import {
   Model,
   ModelTrigger,
   ModelContent,
-  ModelDescription,
   ModelHeader,
-  ModelTitle,
   ModelBody,
   ModelFooter,
 } from "@/components/responsive-model";
-import { Textarea } from "../ui/textarea";
 
 const EducationForm = () => {
   const form = useForm<Education>({
-    // resolver: zodResolver(EducationSchema),
+    resolver: zodResolver(EducationSchema),
   });
 
   function onSubmit(data: Education) {
-    console.log("hi");
+    console.log(data);
   }
 
   return (

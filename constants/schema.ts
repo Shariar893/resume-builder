@@ -25,3 +25,16 @@ export const EducationSchema = z.object({
     score: z.coerce.number().optional(),
   }),
 });
+
+export const ExperienceSchema = z.object({
+  id: z.number().optional(),
+  experience: z.object({
+    expId: z.number().optional(),
+    role: z.string(),
+    company: z.string(),
+    location: z.string(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
