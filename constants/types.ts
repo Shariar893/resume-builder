@@ -1,6 +1,7 @@
 import * as z from "zod";
-import { ProfileSchema } from "./schema";
+import { EducationSchema, ProfileSchema } from "./schema";
 export type Profile = z.infer<typeof ProfileSchema>;
+export type Education = z.infer<typeof EducationSchema>;
 export type Experience = {
   id: number;
   title: string;
@@ -10,15 +11,7 @@ export type Experience = {
   endDate?: Date | string;
   description?: string;
 };
-export type Education = {
-  id: number;
-  school: string;
-  degree: string;
-  fieldOfStudy: string;
-  startDate?: Date;
-  endDate?: Date | string;
-  description?: string;
-};
+
 export type Skill = {
   id: number;
   name: string;
@@ -35,16 +28,16 @@ export type Project = {
 
 export type Resume = {
   profile: Profile;
-  experiences: Experience[];
-  educations: Education[];
+  experiences: Experience;
+  educations: Education;
   skills: Skill[];
   projects: Project[];
 };
 
 export type ResumeStore = Resume & {
   setProfile: (profile: Profile) => void;
-  setExperiences: (experiences: Experience[]) => void;
-  setEducations: (educations: Education[]) => void;
+  setExperiences: (experiences: Experience) => void;
+  setEducations: (educations: Education) => void;
   setSkills: (skills: Skill[]) => void;
   setProjects: (projects: Project[]) => void;
 };

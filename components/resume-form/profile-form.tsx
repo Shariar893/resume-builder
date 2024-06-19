@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import Link from "next/link";
+
 import useResumeStore from "@/store/resumeStore";
 import { ProfileSchema } from "@/constants/schema";
 
@@ -10,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,7 +33,10 @@ const ProfileForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2 max-w-[550px]"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -46,7 +50,103 @@ const ProfileForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="dhanush@gmail.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone</FormLabel>
+              <FormControl>
+                <Input placeholder="+91 9089908978" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="linkedin"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Linkedin Profile</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="https://linkedin.com/dhanushtheijas08"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="github"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Github Profile</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="https://github.com/dhanushtheijas08"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="website"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Potfilio</FormLabel>
+              <FormControl>
+                <Input placeholder="dhanushtheijas.vercel.app" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem className="sm:col-span-2">
+              <FormLabel>Address</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} className="h-20 py-0" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="col-span-2 flex justify-between gap-4">
+          <Button type="submit" className="w-full" variant="outline">
+            Back To Experience
+          </Button>
+          <Button type="submit" className="w-full" asChild>
+            <Link href="">Next Section</Link>
+          </Button>
+        </div>
       </form>
     </Form>
   );
