@@ -2,6 +2,7 @@ import * as z from "zod";
 import {
   EducationSchema,
   ExperienceSchema,
+  LanguageSchema,
   ProfileSchema,
   ProjectSchema,
   SkillSchema,
@@ -11,6 +12,7 @@ export type Education = z.infer<typeof EducationSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
+export type Language = z.infer<typeof LanguageSchema>;
 
 export type Resume = {
   profile: Profile;

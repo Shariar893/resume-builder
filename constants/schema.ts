@@ -58,3 +58,11 @@ export const ProjectSchema = z.object({
     projectDescription: z.string().optional(),
   }),
 });
+export const LanguageSchema = z.object({
+  id: z.number().optional(),
+  language: z.object({
+    LanguageId: z.number().optional(),
+    languageName: z.string(),
+    proficiency: z.string().optional(),
+  }),
+});
