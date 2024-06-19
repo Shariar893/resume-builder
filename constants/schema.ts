@@ -47,3 +47,14 @@ export const SkillSchema = z.object({
     level: z.string().optional(),
   }),
 });
+
+export const ProjectSchema = z.object({
+  id: z.number().optional(),
+  project: z.object({
+    projectId: z.number().optional(),
+    projectName: z.string(),
+    deploymentLink: z.string().optional(),
+    repoLink: z.string().optional(),
+    projectDescription: z.string().optional(),
+  }),
+});

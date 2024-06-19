@@ -3,21 +3,14 @@ import {
   EducationSchema,
   ExperienceSchema,
   ProfileSchema,
+  ProjectSchema,
   SkillSchema,
 } from "./schema";
 export type Profile = z.infer<typeof ProfileSchema>;
 export type Education = z.infer<typeof EducationSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
-
-export type Project = {
-  id: number;
-  name: string;
-  description?: string;
-  startDate?: Date;
-  endDate?: Date | string;
-  link?: string;
-};
+export type Project = z.infer<typeof ProjectSchema>;
 
 export type Resume = {
   profile: Profile;
