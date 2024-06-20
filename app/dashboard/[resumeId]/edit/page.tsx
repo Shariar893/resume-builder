@@ -1,3 +1,4 @@
+import CertificationForm from "@/components/resume-form/certification-form";
 import EducationForm from "@/components/resume-form/education-form";
 import ExperienceForm from "@/components/resume-form/experience-form";
 import LanguageForm from "@/components/resume-form/language-form";
@@ -14,6 +15,7 @@ const EditResume = () => {
       <SkillsForm />
       <ProjectForm />
       <LanguageForm />
+      <CertificationForm />
     </div>
   );
 };

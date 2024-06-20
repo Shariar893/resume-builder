@@ -66,3 +66,24 @@ export const LanguageSchema = z.object({
     proficiency: z.string().optional(),
   }),
 });
+export const CertificationSchema = z.object({
+  id: z.number().optional(),
+  certification: z.object({
+    certificationId: z.number().optional(),
+    certificationName: z.string(),
+    certificationAuthority: z.string(),
+    certificationProof: z.string().optional(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+export const ResumeSchema = z.object({
+  id: z.number().optional(),
+  profile: ProfileSchema,
+  education: z.array(EducationSchema),
+  experience: z.array(ExperienceSchema),
+  skills: z.array(SkillSchema),
+  projects: z.array(ProjectSchema),
+  languages: z.array(LanguageSchema),
+  certifications: z.array(CertificationSchema),
+});
