@@ -4,6 +4,7 @@ import ExperienceForm from "@/components/resume-form/experience-form";
 import LanguageForm from "@/components/resume-form/language-form";
 import ProfileForm from "@/components/resume-form/profile-form";
 import ProjectForm from "@/components/resume-form/project-form";
+import PublicationForm from "@/components/resume-form/publication-form";
 import SkillsForm from "@/components/resume-form/skills-form";
 
 const EditResume = () => {
@@ -16,6 +17,7 @@ const EditResume = () => {
       <ProjectForm />
       <LanguageForm />
       <CertificationForm />
+      <PublicationForm />
     </div>
   );
 };

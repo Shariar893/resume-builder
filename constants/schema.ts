@@ -77,6 +77,19 @@ export const CertificationSchema = z.object({
     description: z.string().optional(),
   }),
 });
+
+export const PublicationSchema = z.object({
+  id: z.number().optional(),
+  publication: z.object({
+    publicationId: z.number().optional(),
+    publicationName: z.string(),
+    publicationLink: z.string().optional(),
+    publicationPublisher: z.string().optional(),
+    publicationDate: z.string().optional(),
+    publicationDescription: z.string().optional(),
+  }),
+});
+
 export const ResumeSchema = z.object({
   id: z.number().optional(),
   profile: ProfileSchema,
