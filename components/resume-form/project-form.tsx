@@ -26,7 +26,7 @@ import {
   ModelBody,
   ModelFooter,
 } from "@/components/responsive-model";
-
+import TextEditor from "@/components/TextEditor";
 const ProjectForm = () => {
   const form = useForm<Project>({
     resolver: zodResolver(ProjectSchema),
@@ -116,7 +116,10 @@ const ProjectForm = () => {
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea {...field} placeholder="" className="h-32" />
+                        <TextEditor
+                          disabled={field.disabled!}
+                          value={field.value!}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

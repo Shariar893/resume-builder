@@ -5,7 +5,18 @@ import sanitizeHtml from "sanitize-html";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, List, ListOrdered, Strikethrough } from "lucide-react";
+import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
+
+import {
+  Bold,
+  Italic,
+  Link2,
+  List,
+  ListOrdered,
+  Strikethrough,
+  UnderlineIcon,
+} from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
 const TextEditor = ({
@@ -32,6 +43,17 @@ const TextEditor = ({
           },
         },
       }),
+      Link.configure({
+        openOnClick: true,
+        autolink: true,
+        protocols: ["http", "https"],
+        HTMLAttributes: {
+          class: "text-blue-400 underline hover:text-blue-500 cursor-pointer",
+        },
+      }),
+      Underline.configure({
+        HTMLAttributes: {},
+      }),
     ],
     onUpdate({ editor }) {
       const content = editor.getHTML();
@@ -40,7 +62,7 @@ const TextEditor = ({
     editorProps: {
       attributes: {
         class:
-          "h-56 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+          "h-36 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
       },
     },
     content: value,
@@ -60,6 +82,22 @@ const TextEditor = ({
               prevValue === "ordered-list"
             ) {
               editor.chain().focus().toggleOrderedList().run();
+            } else if (
+              value === "ordered-list" ||
+              prevValue === "ordered-list"
+            ) {
+              const url = window.prompt("Enter the URL");
+              if (!url) return;
+              editor
+                .chain()
+                .focus()
+                .toggleLink({ href: url, target: "_blank" })
+                .run();
+            } else if (
+              value === "ordered-list" ||
+              prevValue === "ordered-list"
+            ) {
+              editor.chain().focus().toggleUnderline().run();
             } else {
               editor
                 .chain()
@@ -81,14 +119,20 @@ const TextEditor = ({
           <ToggleGroupItem value="strike" aria-label="Toggle Strike">
             <Strikethrough className="h-4 w-4" />
           </ToggleGroupItem>
+          <ToggleGroupItem value="underline" aria-label="Underline">
+            <UnderlineIcon className="h-4 w-4" />
+          </ToggleGroupItem>
           <ToggleGroupItem value="bullet-list" aria-label="Toggle Bullet List">
             <List className="h-4 w-4" />
           </ToggleGroupItem>
           <ToggleGroupItem
             value="ordered-list"
-            aria-label="Toggle Ordered List List"
+            aria-label="Toggle Ordered List"
           >
             <ListOrdered className="h-4 w-4" />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="link" aria-label="Toggle link">
+            <Link2 className="h-4 w-4" />
           </ToggleGroupItem>
         </ToggleGroup>
       )}

@@ -26,6 +26,7 @@ import {
   ModelBody,
   ModelFooter,
 } from "@/components/responsive-model";
+import TextEditor from "@/components/TextEditor";
 
 const CertificationForm = () => {
   const form = useForm<Certification>({
@@ -132,7 +133,10 @@ const CertificationForm = () => {
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea {...field} placeholder="" />
+                        <TextEditor
+                          disabled={field.disabled!}
+                          value={field.value!}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

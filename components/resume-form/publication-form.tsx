@@ -9,7 +9,6 @@ import { Publication } from "@/constants/types";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../ui/textarea";
 import {
   Form,
   FormControl,
@@ -26,6 +25,7 @@ import {
   ModelBody,
   ModelFooter,
 } from "@/components/responsive-model";
+import TextEditor from "@/components/TextEditor";
 
 const PublicationForm = () => {
   const form = useForm<Publication>({
@@ -134,7 +134,10 @@ const PublicationForm = () => {
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea {...field} placeholder="" />
+                        <TextEditor
+                          disabled={field.disabled!}
+                          value={field.value!}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

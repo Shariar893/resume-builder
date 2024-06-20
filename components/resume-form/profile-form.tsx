@@ -19,8 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Profile } from "@/constants/types";
-import { Textarea } from "../ui/textarea";
-
+import TextEditor from "@/components/TextEditor";
 const ProfileForm = () => {
   const profile = useResumeStore((state) => state.profile);
   const form = useForm<Profile>({
@@ -133,7 +132,7 @@ const ProfileForm = () => {
             <FormItem className="sm:col-span-2">
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="" className="h-20" />
+                <TextEditor disabled={field.disabled!} value={field.value!} />
               </FormControl>
               <FormMessage />
             </FormItem>
