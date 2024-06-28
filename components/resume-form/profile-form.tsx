@@ -35,7 +35,7 @@ const ProfileForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2 max-w-[550px]"
+        className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2 w-[500px]"
       >
         <FormField
           control={form.control}
@@ -138,15 +138,6 @@ const ProfileForm = () => {
             </FormItem>
           )}
         />
-
-        <div className="col-span-2 flex justify-between gap-4">
-          <Button type="submit" className="w-full" variant="outline">
-            Back To Experience
-          </Button>
-          <Button type="submit" className="w-full" asChild>
-            <Link href="">Next Section</Link>
-          </Button>
-        </div>
       </form>
     </Form>
   );

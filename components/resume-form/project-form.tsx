@@ -9,7 +9,6 @@ import { Project } from "@/constants/types";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../ui/textarea";
 import {
   Form,
   FormControl,

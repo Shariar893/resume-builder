@@ -6,18 +6,26 @@ import ProfileForm from "@/components/resume-form/profile-form";
 import ProjectForm from "@/components/resume-form/project-form";
 import PublicationForm from "@/components/resume-form/publication-form";
 import SkillsForm from "@/components/resume-form/skills-form";
+import Resume from "@/components/resume-template/resume";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const EditResume = () => {
   return (
-    <div className="p-4 flex flex-col gap-4">
-      <ProfileForm />
-      <EducationForm />
-      <ExperienceForm />
-      <SkillsForm />
-      <ProjectForm />
-      <LanguageForm />
-      <CertificationForm />
-      <PublicationForm />
+    <div className="flex max-h-screen overflow-hidden">
+      <ScrollArea>
+        <div className="space-y-6 p-4">
+          <ProfileForm />
+          <EducationForm />
+          <ExperienceForm />
+          <SkillsForm />
+          <ProjectForm />
+          <LanguageForm />
+          <CertificationForm />
+          <PublicationForm />
+        </div>
+      </ScrollArea>
+      <Resume />
     </div>
   );
 };
