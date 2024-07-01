@@ -33,6 +33,10 @@
     --ring: 240 4.9% 83.9%;
 
     --radius: 0.5rem;
+
+    --radial-gradient-background: 250, 250, 250;
+    --solid-color-background: 15, 15, 15;
+    --overlay-color: 255, 255, 255;
   }
 
   .dark {
@@ -81,4 +85,59 @@
 
 .no-scroll-bar::-webkit-scrollbar {
   display: none;
+}
+
+.radial-gradient {
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 60%
+    )
+    rgb(240, 240, 240);
+}
+
+.linear-mask {
+  mask-image: linear-gradient(
+    -75deg,
+    white calc(var(--x) + 20%),
+    transparent calc(var(--x) + 30%),
+    white calc(var(--x) + 100%)
+  );
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    white calc(var(--x) + 20%),
+    transparent calc(var(--x) + 30%),
+    white calc(var(--x) + 100%)
+  );
+}
+
+.linear-overlay {
+  background-image: linear-gradient(
+    -75deg,
+    rgba(0, 0, 0, 0.1) calc(var(--x) + 20%),
+    rgba(0, 0, 0, 0.5) calc(var(--x) + 25%),
+    rgba(0, 0, 0, 0.1) calc(var(--x) + 100%)
+  );
+  mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+  -webkit-mask: linear-gradient(black, black) content-box,
+    linear-gradient(black, black);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+.custom-contain {
+  contain: strict;
+}
+
+.custom-transform-style {
+  transform-style: preserve-3d;
+}
+
+.hero-image::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, #08090a 100%);
+  transform: translateX(5%) scale(1.3) rotateX(45deg) rotateY(32deg)
+    rotate(325deg);
 }
