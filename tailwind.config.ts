@@ -35,11 +35,18 @@ const config = {
           from: { backgroundPosition: "200% 0" },
           to: { backgroundPosition: "-200% 0" },
         },
+        zap: {
+          "0%, 9%, 11%, 100%": { fill: "transparent" },
+          "10%": {
+            fill: "white",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shine: "shine 8s ease-in-out infinite",
+        zap: "zap 2250ms calc(var(--index) * 30ms) linear infinite",
       },
       colors: {
         border: "hsl(var(--border))",

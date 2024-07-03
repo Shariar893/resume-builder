@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import ShinyButton from "@/components/ShinyButton";
 import Header from "@/components/header";
 import NewBg from "./newbg";
+import KeyFeatures from "./sample";
 
 const Page = () => {
   return (
@@ -41,13 +42,17 @@ const Page = () => {
             height={1000}
             style={{
               transform:
-                "translateX(10%) scale(1.2) rotateX(45deg) rotateY(31deg) rotate(324deg)",
+                "translateX(5%) scale(1.2) rotateX(45deg) rotateY(31deg) rotate(324deg)",
             }}
             className="w-full h-full object-cover object-center rounded-xl"
           />
           <div className="hero-image rounded-xl" />
         </div>
       </main>
+
+      <div className="mt-80">
+        <KeyFeatures />
+      </div>
     </div>
   );
 };

@@ -19,16 +19,16 @@ export type Certification = z.infer<typeof CertificationSchema>;
 export type Publication = z.infer<typeof PublicationSchema>;
 export type Resume = {
   profile: Profile;
-  experiences: Experience;
-  educations: Education;
+  experiences: Experience[];
+  educations: Education[];
   skills: Skill[];
   projects: Project[];
 };
 
 export type ResumeStore = Resume & {
   setProfile: (profile: Profile) => void;
-  setExperiences: (experiences: Experience) => void;
-  setEducations: (educations: Education) => void;
-  setSkills: (skills: Skill[]) => void;
-  setProjects: (projects: Project[]) => void;
+  setExperiences: (experience: Experience) => void;
+  setEducations: (education: Education) => void;
+  setSkills: (skill: Skill) => void;
+  setProjects: (project: Project) => void;
 };

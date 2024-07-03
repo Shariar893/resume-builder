@@ -9,7 +9,6 @@ import { Education } from "@/constants/types";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../ui/textarea";
 import {
   Form,
   FormControl,
@@ -27,19 +26,35 @@ import {
   ModelFooter,
 } from "@/components/responsive-model";
 import TextEditor from "@/components/TextEditor";
+import useResumeStore from "@/store/resumeStore";
+import SectionCard from "../section-card";
 const EducationForm = () => {
   const form = useForm<Education>({
     resolver: zodResolver(EducationSchema),
   });
+  const education = useResumeStore((state) => state.educations);
+  const setEducations = useResumeStore((state) => state.setEducations);
 
   function onSubmit(data: Education) {
-    console.log(data);
+    setEducations(data);
   }
 
   return (
-    <div className="max-w-[550px]">
+    <div className="max-w-[500px]">
+      {education.length > 0 && (
+        <div className="space-y-3">
+          {education.map((edu) => (
+            <SectionCard
+              key={edu.education.startDate!}
+              primaryHeading={edu.education.degree}
+              secondaryHeading={edu.education.fieldOfStudy}
+            />
+          ))}
+        </div>
+      )}
+
       <Model>
-        <ModelTrigger className="w-full">
+        <ModelTrigger className="w-full mt-4">
           <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
             <Plus className="w-5 h-5" />
             <p>Add a new item</p>

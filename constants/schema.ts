@@ -13,7 +13,6 @@ export const ProfileSchema = z.object({
 });
 
 export const EducationSchema = z.object({
-  id: z.number().optional(),
   education: z.object({
     eduId: z.number().optional(),
     institutionName: z.string(),
@@ -40,7 +39,7 @@ export const ExperienceSchema = z.object({
 });
 
 export const SkillSchema = z.object({
-  id: z.number().optional(),
+  // id: z.number().optional(),
   skill: z.object({
     skillId: z.number().optional(),
     skillName: z.string(),

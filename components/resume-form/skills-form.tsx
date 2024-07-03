@@ -32,14 +32,18 @@ import {
   ModelBody,
   ModelFooter,
 } from "@/components/responsive-model";
+import useResumeStore from "@/store/resumeStore";
 
 const SkillsForm = () => {
   const form = useForm<Skill>({
     resolver: zodResolver(SkillSchema),
   });
 
+  const skills = useResumeStore((state) => state.skills);
+  const setSkills = useResumeStore((state) => state.setSkills);
+
   function onSubmit(data: Skill) {
-    console.log(data);
+    setSkills(data);
   }
 
   return (

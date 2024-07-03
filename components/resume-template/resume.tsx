@@ -83,7 +83,7 @@ const Resume = () => {
   const resumeRef = useRef(null);
 
   return (
-    <div className="p-4 relative">
+    <div className="p-4 relative col-span-8">
       <TransformWrapper
         ref={resumeRef}
         maxScale={2}
