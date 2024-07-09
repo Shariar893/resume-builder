@@ -4,15 +4,23 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EyeOff, Menu, Plus, Trash2 } from "lucide-react";
+import {
+  CircleEllipsis,
+  Ellipsis,
+  EllipsisVertical,
+  EyeOff,
+  Menu,
+  Plus,
+  Trash2,
+} from "lucide-react";
 
 const SectionAction = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="hover:bg-accent focus:bg-accent rounded-[2px] p-1">
-        <Menu />
+        <EllipsisVertical className="size-6" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent align="start">
         <DropdownMenuItem>
           <Plus className="w-4 h-4 mr-2" />
           Add Item

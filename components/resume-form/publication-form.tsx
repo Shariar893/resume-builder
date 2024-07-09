@@ -6,8 +6,14 @@ import { useForm } from "react-hook-form";
 import { PublicationSchema } from "@/constants/schema";
 import { Publication } from "@/constants/types";
 
-import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import {
+  Model,
+  ModelBody,
+  ModelContent,
+  ModelFooter,
+  ModelHeader,
+} from "@/components/responsive-model";
+import TextEditor from "@/components/TextEditor";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,35 +23,55 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Model,
-  ModelTrigger,
-  ModelContent,
-  ModelHeader,
-  ModelBody,
-  ModelFooter,
-} from "@/components/responsive-model";
-import TextEditor from "@/components/TextEditor";
+import { Input } from "@/components/ui/input";
 
-const PublicationForm = () => {
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+type PublicationFormProps = {
+  isOpened: boolean;
+  setIsOpened: Dispatch<SetStateAction<boolean>>;
+  onCreate: (data: Publication) => void;
+  onEdit: (id: string, data: Publication) => void;
+  selectedPublication: string | null;
+  mode: "create" | "edit";
+  defaultVal: Publication | undefined;
+};
+
+const PublicationForm = ({
+  selectedPublication,
+  onCreate,
+  onEdit,
+  isOpened,
+  setIsOpened,
+  mode,
+  defaultVal,
+}: PublicationFormProps) => {
   const form = useForm<Publication>({
     resolver: zodResolver(PublicationSchema),
+    defaultValues: defaultVal,
   });
 
+  useEffect(() => {
+    form.reset(defaultVal);
+  }, [defaultVal, form]);
+
   function onSubmit(data: Publication) {
-    console.log(data);
+    if (selectedPublication) {
+      console.log(data);
+
+      onEdit(data.publicationId, {
+        ...data,
+      });
+    } else {
+      onCreate({ ...data, publicationId: uuidv4() });
+    }
+    setIsOpened(false);
   }
 
   return (
     <div className="max-w-[550px]">
-      <Model>
-        <ModelTrigger className="w-full">
-          <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
-            <Plus className="w-5 h-5" />
-            <p>Add a new item</p>
-          </div>
-        </ModelTrigger>
-
+      <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold">
             Publication Section
@@ -58,7 +84,7 @@ const PublicationForm = () => {
               >
                 <FormField
                   control={form.control}
-                  name="publication.publicationName"
+                  name="publicationName"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Publication Name</FormLabel>
@@ -75,7 +101,7 @@ const PublicationForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="publication.publicationPublisher"
+                  name="publicationPublisher"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Publisher</FormLabel>
@@ -93,7 +119,7 @@ const PublicationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="publication.publicationDate"
+                  name="publicationDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Published Date</FormLabel>
@@ -111,7 +137,7 @@ const PublicationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="publication.publicationLink"
+                  name="publicationLink"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Publication Proof</FormLabel>
@@ -129,7 +155,7 @@ const PublicationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="publication.publicationDescription"
+                  name="publicationDescription"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
@@ -137,6 +163,7 @@ const PublicationForm = () => {
                         <TextEditor
                           disabled={field.disabled!}
                           value={field.value!}
+                          fieldName="publicationDescription"
                         />
                       </FormControl>
                       <FormMessage />

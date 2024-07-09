@@ -6,16 +6,14 @@ import { useForm } from "react-hook-form";
 import { SkillSchema } from "@/constants/schema";
 import { Skill } from "@/constants/types";
 
-import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Model,
+  ModelBody,
+  ModelContent,
+  ModelFooter,
+  ModelHeader,
+} from "@/components/responsive-model";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -24,38 +22,61 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
-  Model,
-  ModelTrigger,
-  ModelContent,
-  ModelHeader,
-  ModelBody,
-  ModelFooter,
-} from "@/components/responsive-model";
-import useResumeStore from "@/store/resumeStore";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const SkillsForm = () => {
+type SkillFormProps = {
+  isOpened: boolean;
+  setIsOpened: Dispatch<SetStateAction<boolean>>;
+  onCreate: (data: Skill) => void;
+  onEdit: (id: string, data: Skill) => void;
+  selectedSkill: string | null;
+  mode: "create" | "edit";
+  defaultVal: Skill | undefined;
+};
+
+const SkillForm = ({
+  selectedSkill,
+  onCreate,
+  onEdit,
+  isOpened,
+  setIsOpened,
+  mode,
+  defaultVal,
+}: SkillFormProps) => {
   const form = useForm<Skill>({
     resolver: zodResolver(SkillSchema),
+    defaultValues: defaultVal,
   });
 
-  const skills = useResumeStore((state) => state.skills);
-  const setSkills = useResumeStore((state) => state.setSkills);
+  useEffect(() => {
+    form.reset(defaultVal);
+  }, [defaultVal, form]);
 
   function onSubmit(data: Skill) {
-    setSkills(data);
+    if (selectedSkill) {
+      console.log(data);
+
+      onEdit(data.skillId, {
+        ...data,
+      });
+    } else {
+      onCreate({ ...data, skillId: uuidv4() });
+    }
+    setIsOpened(false);
   }
 
   return (
     <div className="max-w-[550px]">
-      <Model>
-        <ModelTrigger className="w-full">
-          <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
-            <Plus className="w-5 h-5" />
-            <p>Add a new skill</p>
-          </div>
-        </ModelTrigger>
-
+      <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold text-xl">
             Skill Section
@@ -68,7 +89,7 @@ const SkillsForm = () => {
               >
                 <FormField
                   control={form.control}
-                  name="skill.skillName"
+                  name="skillName"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Skill Name</FormLabel>
@@ -85,7 +106,7 @@ const SkillsForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="skill.level"
+                  name="level"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Skill Level</FormLabel>
@@ -128,4 +149,4 @@ const SkillsForm = () => {
   );
 };
 
-export default SkillsForm;
+export default SkillForm;

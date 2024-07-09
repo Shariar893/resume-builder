@@ -6,10 +6,15 @@ import { useForm } from "react-hook-form";
 import { CertificationSchema } from "@/constants/schema";
 import { Certification } from "@/constants/types";
 
-import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import {
+  Model,
+  ModelBody,
+  ModelContent,
+  ModelFooter,
+  ModelHeader,
+} from "@/components/responsive-model";
+import TextEditor from "@/components/TextEditor";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../ui/textarea";
 import {
   Form,
   FormControl,
@@ -18,35 +23,55 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Model,
-  ModelTrigger,
-  ModelContent,
-  ModelHeader,
-  ModelBody,
-  ModelFooter,
-} from "@/components/responsive-model";
-import TextEditor from "@/components/TextEditor";
+import { Input } from "@/components/ui/input";
 
-const CertificationForm = () => {
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+type CertificationFormProps = {
+  isOpened: boolean;
+  setIsOpened: Dispatch<SetStateAction<boolean>>;
+  onCreate: (data: Certification) => void;
+  onEdit: (id: string, data: Certification) => void;
+  selectedCertification: string | null;
+  mode: "create" | "edit";
+  defaultVal: Certification | undefined;
+};
+
+const CertificationForm = ({
+  selectedCertification,
+  onCreate,
+  onEdit,
+  isOpened,
+  setIsOpened,
+  mode,
+  defaultVal,
+}: CertificationFormProps) => {
   const form = useForm<Certification>({
     resolver: zodResolver(CertificationSchema),
+    defaultValues: defaultVal,
   });
 
+  useEffect(() => {
+    form.reset(defaultVal);
+  }, [defaultVal, form]);
+
   function onSubmit(data: Certification) {
-    console.log(data);
+    if (selectedCertification) {
+      console.log(data);
+
+      onEdit(data.certificationId, {
+        ...data,
+      });
+    } else {
+      onCreate({ ...data, certificationId: uuidv4() });
+    }
+    setIsOpened(false);
   }
 
   return (
     <div className="max-w-[550px]">
-      <Model>
-        <ModelTrigger className="w-full">
-          <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
-            <Plus className="w-5 h-5" />
-            <p>Add a new item</p>
-          </div>
-        </ModelTrigger>
-
+      <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold">Education Section</ModelHeader>
           <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
@@ -57,7 +82,7 @@ const CertificationForm = () => {
               >
                 <FormField
                   control={form.control}
-                  name="certification.certificationName"
+                  name="certificationName"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Certificate Name</FormLabel>
@@ -74,7 +99,7 @@ const CertificationForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="certification.certificationAuthority"
+                  name="certificationAuthority"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Authority</FormLabel>
@@ -92,7 +117,7 @@ const CertificationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="certification.date"
+                  name="date"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Issued Date</FormLabel>
@@ -110,7 +135,7 @@ const CertificationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="certification.certificationProof"
+                  name="certificationProof"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Certification Proof</FormLabel>
@@ -128,7 +153,7 @@ const CertificationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="certification.description"
+                  name="description"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
@@ -136,6 +161,7 @@ const CertificationForm = () => {
                         <TextEditor
                           disabled={field.disabled!}
                           value={field.value!}
+                          fieldName="description"
                         />
                       </FormControl>
                       <FormMessage />

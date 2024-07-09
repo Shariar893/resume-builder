@@ -1,13 +1,19 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import { ExperienceSchema } from "@/constants/schema";
 import { Experience } from "@/constants/types";
 
-import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import {
+  Model,
+  ModelBody,
+  ModelContent,
+  ModelFooter,
+  ModelHeader,
+} from "@/components/responsive-model";
+import TextEditor from "@/components/TextEditor";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,34 +23,53 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Model,
-  ModelTrigger,
-  ModelContent,
-  ModelHeader,
-  ModelBody,
-  ModelFooter,
-} from "@/components/responsive-model";
-import TextEditor from "@/components/TextEditor";
-const ExperienceForm = () => {
+import { Input } from "@/components/ui/input";
+import { Dispatch, SetStateAction, useEffect } from "react";
+
+type ExperienceFormProps = {
+  isOpened: boolean;
+  setIsOpened: Dispatch<SetStateAction<boolean>>;
+  onCreate: (data: Experience) => void;
+  onEdit: (id: string, data: Experience) => void;
+  selectedExperience: string | null;
+  mode: "create" | "edit";
+  defaultVal: Experience | undefined;
+};
+
+const ExperienceForm = ({
+  selectedExperience,
+  onCreate,
+  onEdit,
+  isOpened,
+  setIsOpened,
+  mode,
+  defaultVal,
+}: ExperienceFormProps) => {
   const form = useForm<Experience>({
     resolver: zodResolver(ExperienceSchema),
+    defaultValues: defaultVal,
   });
 
+  useEffect(() => {
+    form.reset(defaultVal);
+  }, [defaultVal, form]);
+
   function onSubmit(data: Experience) {
-    console.log(data);
+    if (selectedExperience) {
+      console.log(data);
+
+      onEdit(data.expId, {
+        ...data,
+      });
+    } else {
+      onCreate({ ...data, expId: uuidv4() });
+    }
+    setIsOpened(false);
   }
 
   return (
     <div className="max-w-[550px]">
-      <Model>
-        <ModelTrigger className="w-full">
-          <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
-            <Plus className="w-5 h-5" />
-            <p>Add a new item</p>
-          </div>
-        </ModelTrigger>
-
+      <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold text-xl">
             Experience Section
@@ -57,7 +82,7 @@ const ExperienceForm = () => {
               >
                 <FormField
                   control={form.control}
-                  name="experience.company"
+                  name="company"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company Name</FormLabel>
@@ -74,7 +99,7 @@ const ExperienceForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="experience.role"
+                  name="role"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Role</FormLabel>
@@ -92,7 +117,7 @@ const ExperienceForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="experience.startDate"
+                  name="startDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Start Date</FormLabel>
@@ -110,7 +135,7 @@ const ExperienceForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="experience.endDate"
+                  name="endDate"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>End Date</FormLabel>
@@ -127,7 +152,7 @@ const ExperienceForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="experience.location"
+                  name="location"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>Location</FormLabel>
@@ -145,7 +170,7 @@ const ExperienceForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="experience.description"
+                  name="description"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
@@ -153,6 +178,7 @@ const ExperienceForm = () => {
                         <TextEditor
                           disabled={field.disabled!}
                           value={field.value!}
+                          fieldName="description"
                         />
                       </FormControl>
                       <FormMessage />

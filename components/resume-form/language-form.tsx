@@ -2,20 +2,19 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import { LanguageSchema } from "@/constants/schema";
 import { Language } from "@/constants/types";
 
-import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Model,
+  ModelBody,
+  ModelContent,
+  ModelFooter,
+  ModelHeader,
+} from "@/components/responsive-model";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -24,34 +23,57 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
-  Model,
-  ModelTrigger,
-  ModelContent,
-  ModelHeader,
-  ModelBody,
-  ModelFooter,
-} from "@/components/responsive-model";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-const LanguageForm = () => {
+type languageFormProps = {
+  isOpened: boolean;
+  setIsOpened: Dispatch<SetStateAction<boolean>>;
+  onCreate: (data: Language) => void;
+  onEdit: (id: string, data: Language) => void;
+  selectedLanguage: string | null;
+  mode: "create" | "edit";
+  defaultVal: Language | undefined;
+};
+
+const LanguageForm = ({
+  selectedLanguage,
+  onCreate,
+  onEdit,
+  isOpened,
+  setIsOpened,
+  mode,
+  defaultVal,
+}: languageFormProps) => {
   const form = useForm<Language>({
     resolver: zodResolver(LanguageSchema),
   });
 
+  useEffect(() => {
+    form.reset(defaultVal);
+  }, [defaultVal, form]);
+
   function onSubmit(data: Language) {
-    console.log(data);
+    if (selectedLanguage) {
+      onEdit(data.languageId, {
+        ...data,
+      });
+    } else {
+      onCreate({ ...data, languageId: uuidv4() });
+    }
+    setIsOpened(false);
   }
 
   return (
     <div className="max-w-[550px]">
-      <Model>
-        <ModelTrigger className="w-full">
-          <div className="flex justify-center items-center gap-2 border-[1.5px] border-dashed py-4 cursor-pointer">
-            <Plus className="w-5 h-5" />
-            <p>Add a new skill</p>
-          </div>
-        </ModelTrigger>
-
+      <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold text-xl">
             Skill Section
@@ -60,11 +82,11 @@ const LanguageForm = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full md:px-1 mb-2 md:mb-1 grid gap-2 grid-cols-2"
+                className="w-full md:px-1 mb-2 md:mb-1 flex flex-col gap-4"
               >
                 <FormField
                   control={form.control}
-                  name="language.languageName"
+                  name="languageName"
                   render={({ field }) => (
                     <FormItem className="col-span-2 sm:col-span-1">
                       <FormLabel>Language</FormLabel>
@@ -81,7 +103,7 @@ const LanguageForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="language.proficiency"
+                  name="proficiency"
                   render={({ field }) => (
                     <FormItem className="col-span-2 sm:col-span-1">
                       <FormLabel>Proficiency</FormLabel>

@@ -1,24 +1,37 @@
-const ResumeTemplate = ({ data }) => {
+"use client";
+import useResumeStore from "@/store/resumeStore";
+import parse from "html-react-parser";
+import DOMPurify from "dompurify";
+import { seperateDes } from "@/lib/seperate-des";
+import { calculateDuration } from "@/lib/duration-gap-caluclator";
+const ResumeTemplate = () => {
+  const profile = useResumeStore((state) => state.profile);
+  const educations = useResumeStore((state) => state.educations);
+  const experiences = useResumeStore((state) => state.experiences);
+  const projects = useResumeStore((state) => state.projects);
+  const skills = useResumeStore((state) => state.skills);
+  const certifications = useResumeStore((state) => state.certifications);
+
   return (
     <div className="bg-white text-gray-800 p-8 max-w-4xl mx-auto">
+      {/* profile */}
       <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-black">{data.name}</h1>
-        <p className="text-xl text-gray-600">{data.title}</p>
+        <h1 className="text-4xl font-bold text-black">{profile.name}</h1>
         <div className="mt-4 flex justify-center space-x-4">
           <a
-            href={`tel:${data.contact.phone}`}
+            href={`tel:${profile.phone}`}
             className="text-blue-600 hover:underline"
           >
-            {data.contact.phone}
+            {profile.phone}
           </a>
           <a
-            href={`mailto:${data.contact.email}`}
+            href={`mailto:${profile.email}`}
             className="text-blue-600 hover:underline"
           >
-            {data.contact.email}
+            {profile.email}
           </a>
           <a
-            href={data.contact.website}
+            href={profile.website}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline"
@@ -26,7 +39,7 @@ const ResumeTemplate = ({ data }) => {
             Website
           </a>
           <a
-            href={data.contact.linkedin}
+            href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline"
@@ -34,7 +47,7 @@ const ResumeTemplate = ({ data }) => {
             LinkedIn
           </a>
           <a
-            href={data.contact.github}
+            href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline"
@@ -44,45 +57,52 @@ const ResumeTemplate = ({ data }) => {
         </div>
       </header>
 
+      {/* Experience */}
       <main className="grid grid-cols-3 gap-8">
         <div className="col-span-2">
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4 text-black">Experience</h2>
-            {data.experience.map((exp, index) => (
+            {experiences.map((experience, index) => (
               <div key={index} className="mb-4">
-                <h3 className="text-xl font-bold">{exp.role}</h3>
-                <p className="text-lg">{exp.company}</p>
-                <p className="italic">{`${exp.duration} | ${exp.location}`}</p>
+                <h3 className="text-xl font-bold">{experience.role}</h3>
+                <p className="text-lg">{experience.company}</p>
+                <p className="italic">{`| ${experience.location}`}</p>
+                <p className="italic">{`${experience.startDate} - ${experience.endDate}`}</p>
                 <ul className="list-disc list-inside mt-2">
-                  {exp.responsibilities.map((item, idx) => (
-                    <li key={idx}>{item}</li>
+                  {seperateDes(experience.description!).map((item, idx) => (
+                    <li key={idx}>{parse(DOMPurify.sanitize(item))}</li>
                   ))}
                 </ul>
               </div>
             ))}
           </section>
 
+          {/* Education */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4 text-black">Education</h2>
-            {data.education.map((edu, index) => (
+            {educations.map((edu, index) => (
               <div key={index} className="mb-4">
-                <h3 className="text-xl font-bold">{edu.degree}</h3>
-                <p>{`${edu.institution} | ${edu.duration} | ${edu.location}`}</p>
+                <h3 className="text-xl font-bold">
+                  {edu.degree} {edu.fieldOfStudy}
+                </h3>
+                <p>{`${edu.institutionName} | ${calculateDuration(
+                  edu.startDate!,
+                  edu.endDate!
+                )} | `}</p>
               </div>
             ))}
           </section>
 
+          {/* Project */}
+
           <section>
             <h2 className="text-2xl font-bold mb-4 text-black">Projects</h2>
-            {data.projects.map((project, index) => (
+            {projects.map((project, index) => (
               <div key={index} className="mb-4">
-                <h3 className="text-xl font-bold">{project.name}</h3>
+                <h3 className="text-xl font-bold">{project.projectName}</h3>
                 <ul className="list-disc list-inside mt-2">
-                  <li>
-                    <strong>{project.techStack}</strong>
-                  </li>
-                  {project.description.map((desc, idx) => (
-                    <li key={idx}>{desc}</li>
+                  {seperateDes(project.projectDescription!).map((item, idx) => (
+                    <li key={idx}>{parse(DOMPurify.sanitize(item))}</li>
                   ))}
                 </ul>
               </div>
@@ -91,54 +111,36 @@ const ResumeTemplate = ({ data }) => {
         </div>
 
         <div>
+          {/* Skills */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4 text-black">
               Technical Skills
             </h2>
             <div className="mb-4">
-              <h3 className="text-xl font-bold">Programming Languages</h3>
               <ul className="list-disc list-inside">
-                {data.skills.programmingLanguages.map((lang, index) => (
-                  <li key={index}>{lang}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="mb-4">
-              <h3 className="text-xl font-bold">Frameworks & Libraries</h3>
-              <ul className="list-disc list-inside">
-                {data.skills.frameworksLibraries.map((framework, index) => (
-                  <li key={index}>{framework}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="mb-4">
-              <h3 className="text-xl font-bold">Version Control</h3>
-              <ul className="list-disc list-inside">
-                {data.skills.versionControl.map((tool, index) => (
-                  <li key={index}>{tool}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold">Databases / Other Tools</h3>
-              <ul className="list-disc list-inside">
-                {data.skills.tools.map((tool, index) => (
-                  <li key={index}>{tool}</li>
+                {skills.map((skill, index) => (
+                  <li key={index}>
+                    {parse(DOMPurify.sanitize(skill.skillName))}
+                  </li>
                 ))}
               </ul>
             </div>
           </section>
 
+          {/* Certifications */}
           <section>
             <h2 className="text-2xl font-bold mb-4 text-black">
               Certifications
             </h2>
             <ul className="list-disc list-inside">
-              {data.certifications.map((cert, index) => (
-                <li key={index}>
-                  {cert.title}{" "}
-                  <a href={cert.link} className="text-blue-600 hover:underline">
-                    {cert.issuer}
+              {certifications.map((cert, index) => (
+                <li key={index} className="mb-4">
+                  <strong className="text-xl font-bold">
+                    {cert.certificationName}
+                  </strong>
+                  by
+                  <a href={cert.certificationProof}>
+                    {cert.certificationAuthority}
                   </a>
                 </li>
               ))}

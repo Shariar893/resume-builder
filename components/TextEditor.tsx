@@ -22,12 +22,14 @@ import { useFormContext } from "react-hook-form";
 const TextEditor = ({
   value,
   disabled,
+  fieldName,
 }: {
   value: string;
   disabled: boolean;
+  fieldName: string;
 }) => {
   const [prevValue, setPrevValue] = useState("");
-  const { setValue, formState } = useFormContext();
+  const { setValue } = useFormContext();
 
   const editor = useEditor({
     extensions: [
@@ -57,7 +59,9 @@ const TextEditor = ({
     ],
     onUpdate({ editor }) {
       const content = editor.getHTML();
-      setValue("description", sanitizeHtml(content), { shouldValidate: true });
+      setValue(fieldName, sanitizeHtml(content), {
+        shouldValidate: true,
+      });
     },
     editorProps: {
       attributes: {

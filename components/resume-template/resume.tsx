@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Draggable from "react-draggable";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ResumeTemplate from "./resume-sample-1";
-import PDFDownloadButton from "./pdf-downlod-button";
 import ResumeToolKit from "./resume-tool-kit";
+import ResumeTemplate2 from "./resume-sample-2";
 const data = {
   name: "Dhanush TP",
   title: "Engineering Undergraduate",
@@ -83,7 +83,7 @@ const Resume = () => {
   const resumeRef = useRef(null);
 
   return (
-    <div className="p-4 relative col-span-8">
+    <div className="p-4 relative w-full">
       <TransformWrapper
         ref={resumeRef}
         maxScale={2}
@@ -113,7 +113,7 @@ const Resume = () => {
                     transformOrigin: "top left",
                   }}
                 >
-                  <ResumeTemplate data={data} />
+                  <ResumeTemplate />
                 </div>
               </Draggable>
             </TransformComponent>

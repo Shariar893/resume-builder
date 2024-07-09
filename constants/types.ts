@@ -23,6 +23,9 @@ export type Resume = {
   educations: Education[];
   skills: Skill[];
   projects: Project[];
+  languages: Language[];
+  certifications: Certification[];
+  publications: Publication[];
 };
 
 export type ResumeStore = Resume & {
@@ -31,4 +34,28 @@ export type ResumeStore = Resume & {
   setEducations: (education: Education) => void;
   setSkills: (skill: Skill) => void;
   setProjects: (project: Project) => void;
+  setLanguages: (language: Language) => void;
+  setCertifications: (certification: Certification) => void;
+  setPublications: (publication: Publication) => void;
+
+  //
+  deleteExperience: (experienceId: string) => void;
+  deleteEducation: (educationId: string) => void;
+  deleteSkill: (skillId: string) => void;
+  deleteProject: (projectId: string) => void;
+  deleteLanguage: (languageId: string) => void;
+  deleteCertification: (certificationId: string) => void;
+  deletePublication: (publicationId: string) => void;
+
+  //
+  updateExperience: (experienceId: string, experience: Experience) => void;
+  updateEducation: (educationId: string, education: Education) => void;
+  updateSkill: (skillId: string, skill: Skill) => void;
+  updateProject: (projectId: string, project: Project) => void;
+  updateLanguage: (languageId: string, language: Language) => void;
+  updateCertification: (
+    certificationId: string,
+    certification: Certification
+  ) => void;
+  updatePublication: (publicationId: string, publication: Publication) => void;
 };

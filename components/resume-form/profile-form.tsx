@@ -132,7 +132,11 @@ const ProfileForm = () => {
             <FormItem className="sm:col-span-2">
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <TextEditor disabled={field.disabled!} value={field.value!} />
+                <TextEditor
+                  disabled={field.disabled!}
+                  value={field.value!}
+                  fieldName="address"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
