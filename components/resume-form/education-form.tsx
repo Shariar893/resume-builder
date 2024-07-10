@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
+import { ScrollArea } from "../ui/scroll-area";
 
 type EducationFormProps = {
   isOpened: boolean;
@@ -60,7 +61,6 @@ const EducationForm = ({
     if (selectedEducation) {
       onEdit(data.eduId, {
         ...data,
-        // eduId: selectedEducation?.eduId,
       });
     } else {
       onCreate({ ...data, eduId: uuidv4() });
@@ -70,48 +70,120 @@ const EducationForm = ({
   return (
     <div className="max-w-[500px]">
       <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
-        {/* <ModelTrigger className="w-full mt-4">{triggerEl}</ModelTrigger> */}
-
         <ModelContent>
           <ModelHeader className="font-semibold">Education Section</ModelHeader>
           <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
             <Form {...form}>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  onSubmit(form.getValues());
-                }}
-                className="space-y-2.5 w-full md:px-1 mb-2 md:mb-1"
-              >
-                <FormField
-                  control={form.control}
-                  name="institutionName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Institution Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className="text-base"
-                          placeholder="Institution Name"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="flex flex-col sm:flex-row sm:justify-between w-full gap-4">
+              <ScrollArea className="scrollbar-none hidden md:block">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    onSubmit(form.getValues());
+                  }}
+                  className="space-y-2.5 w-full md:px-1 mb-2 md:mb-1 max-h-[80vh]"
+                >
                   <FormField
                     control={form.control}
-                    name="degree"
+                    name="institutionName"
                     render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>Degree</FormLabel>
+                      <FormItem>
+                        <FormLabel>Institution Name</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             className="text-base"
-                            placeholder=""
+                            placeholder="Institution Name"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex flex-col sm:flex-row sm:justify-between w-full gap-4">
+                    <FormField
+                      control={form.control}
+                      name="degree"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Degree</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              className="text-base"
+                              placeholder=""
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="fieldOfStudy"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Field of Study</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              className="text-base"
+                              placeholder=""
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:justify-between w-full gap-4">
+                    <FormField
+                      control={form.control}
+                      name="startDate"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Start Date</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder=""
+                              className="text-base"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="endDate"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>End Date</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder=""
+                              className="text-base"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="score"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Score</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="text-base"
+                            placeholder="Your CGPA"
                           />
                         </FormControl>
                         <FormMessage />
@@ -121,100 +193,28 @@ const EducationForm = ({
 
                   <FormField
                     control={form.control}
-                    name="fieldOfStudy"
+                    name="description"
                     render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>Field of Study</FormLabel>
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            className="text-base"
-                            placeholder=""
+                          <TextEditor
+                            disabled={field.disabled!}
+                            value={field.value!}
+                            fieldName={field.name}
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:justify-between w-full gap-4">
-                  <FormField
-                    control={form.control}
-                    name="startDate"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>Start Date</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder=""
-                            className="text-base"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="endDate"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>End Date</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder=""
-                            className="text-base"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <FormField
-                  control={form.control}
-                  name="score"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Score</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className="text-base"
-                          placeholder="Your CGPA"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <TextEditor
-                          disabled={field.disabled!}
-                          value={field.value!}
-                          fieldName={field.name}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <ModelFooter className="p-0">
-                  <Button type="submit" className="w-full mt-2">
-                    Save changes
-                  </Button>
-                </ModelFooter>
-              </form>
+                  <ModelFooter className="p-0">
+                    <Button type="submit" className="w-full mt-2">
+                      Save changes
+                    </Button>
+                  </ModelFooter>
+                </form>
+              </ScrollArea>
             </Form>
           </ModelBody>
         </ModelContent>

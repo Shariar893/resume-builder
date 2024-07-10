@@ -6,6 +6,8 @@ import ShinyButton from "@/components/ShinyButton";
 import Header from "@/components/header";
 import NewBg from "./newbg";
 import KeyFeatures from "./sample";
+import Link from "next/link";
+import SelectDialog from "@/components/select-template-dialog";
 
 const Page = () => {
   return (
@@ -23,10 +25,8 @@ const Page = () => {
           Say goodbye to formatting struggles. Our intuitive <br /> builder
           creates ATS-friendly resumes in minutes, not hours.
         </p>
-        <ShinyButton>
-          Start Building
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </ShinyButton>
+
+        <SelectDialog />
 
         <div
           className=""

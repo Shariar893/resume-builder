@@ -14,6 +14,8 @@ const useResumeStore = create<ResumeStore>()(
       languages: [],
       certifications: [],
       publications: [],
+      resumeId: null,
+      setResumeId: (newResumeId) => set({ resumeId: newResumeId }),
       setProfile: (profile) => set({ profile }),
       setExperiences: (experience) =>
         set((state) => ({ experiences: [...state.experiences, experience] })),
@@ -39,6 +41,7 @@ const useResumeStore = create<ResumeStore>()(
           publications: [...state.publications, publication],
         })),
 
+      deleteResumeId: () => set({ resumeId: null }),
       deleteEducation: (educationId) =>
         set((state) => ({
           educations: state.educations.filter(

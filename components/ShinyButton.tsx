@@ -11,7 +11,7 @@ const ShinyButton = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <motion.button
+    <motion.div
       initial="initial"
       animate="animate"
       whileTap="whileTap"
@@ -36,7 +36,7 @@ const ShinyButton = ({ children }: { children: ReactNode }) => {
         {children}
       </span>
       <span className="block absolute inset-0 rounded-[2.5px] p-px linear-overlay" />
-    </motion.button>
+    </motion.div>
   );
 };
 
