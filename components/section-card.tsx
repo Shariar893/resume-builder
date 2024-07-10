@@ -34,7 +34,7 @@ const SectionCard = ({
 }: SectionCardProps) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 " draggable={true}>
       <div className="cursor-grab h-[4.5rem] rounded-[2px] flex items-center border border-accent w-[3rem] justify-center">
         <svg
           width="15"

@@ -153,3 +153,6 @@
 .linear-mask-2 {
   mask-image: linear-gradient(#000, transparent 80%);
 }
+.sapke {
+  transform: translateY(0) scale(1.1);
+}
