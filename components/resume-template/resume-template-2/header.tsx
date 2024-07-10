@@ -1,3 +1,4 @@
+"use client";
 import useResumeStore from "@/store/resumeStore";
 
 const Header = () => {

@@ -40,7 +40,6 @@ const Resume = () => {
                     transformOrigin: "top left",
                   }}
                 >
-                  {/* <ResumeTemplate /> */}
                   <ResumeTemplate3 />
                 </div>
               </Draggable>

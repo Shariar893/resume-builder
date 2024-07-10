@@ -8,7 +8,6 @@ import { formatDate } from "@/lib/duration-gap-caluclator";
 import { seperateDes } from "@/lib/seperate-des";
 const Education = () => {
   const educations = useResumeStore((state) => state.educations);
-  console.log(educations[0].description);
 
   return (
     <section className="mb-4">
