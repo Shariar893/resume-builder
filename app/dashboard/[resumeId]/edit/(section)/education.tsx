@@ -39,15 +39,16 @@ const Education = () => {
       {education.length > 0 && (
         <div className="space-y-3">
           {education.map((edu) => (
-            <SectionCard
-              key={edu.startDate!}
-              id={edu.eduId}
-              onDelete={deleteEducation}
-              primaryHeading={edu.degree}
-              secondaryHeading={edu.fieldOfStudy}
-              setIsEducationFormOpen={setIsEducationFormOpen}
-              setSelectedEducation={setSelectedEducation}
-            />
+            <div draggable={true} key={edu.eduId}>
+              <SectionCard
+                id={edu.eduId}
+                onDelete={deleteEducation}
+                primaryHeading={`${edu.degree} ${edu.fieldOfStudy}`}
+                secondaryHeading={edu.institutionName}
+                setIsEducationFormOpen={setIsEducationFormOpen}
+                setSelectedEducation={setSelectedEducation}
+              />
+            </div>
           ))}
         </div>
       )}

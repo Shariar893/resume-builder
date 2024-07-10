@@ -2,8 +2,6 @@
 
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import { useMediaQuery } from "@/hook/use-media-query";
 import {
   Dialog,
   DialogClose,
@@ -24,6 +22,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hook/use-media-query";
+import { cn } from "@/lib/utils";
 
 type BaseProps = {
   children: React.ReactNode;
@@ -135,12 +135,12 @@ const ModelFooter = ({ className, children, ...props }: ModelProps) => {
 
 export {
   Model,
-  ModelTrigger,
+  ModelBody,
   ModelClose,
   ModelContent,
   ModelDescription,
+  ModelFooter,
   ModelHeader,
   ModelTitle,
-  ModelBody,
-  ModelFooter,
+  ModelTrigger,
 };

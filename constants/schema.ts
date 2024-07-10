@@ -6,10 +6,11 @@ export const ProfileSchema = z.object({
   email: z.string(),
   phone: z.string().optional(),
   address: z.string().optional(),
-  description: z.string().optional(),
   linkedin: z.string().optional(),
   github: z.string().optional(),
   website: z.string().optional(),
+  summary: z.string().optional(),
+  role: z.string().optional(),
 });
 
 export const EducationSchema = z.object({

@@ -4,15 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  CircleEllipsis,
-  Ellipsis,
-  EllipsisVertical,
-  EyeOff,
-  Menu,
-  Plus,
-  Trash2,
-} from "lucide-react";
+import { EllipsisVertical, EyeOff, Plus, Trash2 } from "lucide-react";
 
 const SectionAction = () => {
   return (

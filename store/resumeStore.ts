@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
 import { defaultProfile } from "@/constants/defaultValues";
 import { ResumeStore } from "@/constants/types";
 const useResumeStore = create<ResumeStore>()(
@@ -15,8 +14,14 @@ const useResumeStore = create<ResumeStore>()(
       certifications: [],
       publications: [],
       resumeId: null,
+      setProfile: (profileFieldName, profileFieldValue) =>
+        set((state) => ({
+          profile: {
+            ...state.profile,
+            [profileFieldName]: profileFieldValue,
+          } as ResumeStore["profile"],
+        })),
       setResumeId: (newResumeId) => set({ resumeId: newResumeId }),
-      setProfile: (profile) => set({ profile }),
       setExperiences: (experience) =>
         set((state) => ({ experiences: [...state.experiences, experience] })),
       setEducations: (education) =>

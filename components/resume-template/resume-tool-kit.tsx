@@ -1,5 +1,3 @@
-import { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
-import PDFDownloadButton from "./pdf-downlod-button";
 import { useDownloadPdf } from "@/hook/use-download-pdf";
 import {
   Download,
@@ -8,6 +6,7 @@ import {
   ZoomInIcon,
   ZoomOutIcon,
 } from "lucide-react";
+import { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
 
 const ResumeToolKit = ({
   toolTip,

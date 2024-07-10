@@ -18,7 +18,7 @@ export type Language = z.infer<typeof LanguageSchema>;
 export type Certification = z.infer<typeof CertificationSchema>;
 export type Publication = z.infer<typeof PublicationSchema>;
 export type Resume = {
-  profile: Profile;
+  profile: Profile | undefined;
   experiences: Experience[];
   educations: Education[];
   skills: Skill[];
@@ -30,7 +30,10 @@ export type Resume = {
 };
 
 export type ResumeStore = Resume & {
-  setProfile: (profile: Profile) => void;
+  setProfile: (
+    profileFieldName: string,
+    profileFieldValue: string | number
+  ) => void;
   setExperiences: (experience: Experience) => void;
   setEducations: (education: Education) => void;
   setSkills: (skill: Skill) => void;
@@ -48,7 +51,6 @@ export type ResumeStore = Resume & {
   deleteCertification: (certificationId: string) => void;
   deletePublication: (publicationId: string) => void;
   deleteResumeId: () => void;
-
   //
   updateExperience: (experienceId: string, experience: Experience) => void;
   updateEducation: (educationId: string, education: Education) => void;

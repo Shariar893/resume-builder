@@ -1,7 +1,10 @@
 export function calculateDuration(
   startDate: string | Date,
-  endDate: string | Date
+  endDate: string | Date | "Present"
 ): string {
+  if (endDate === "Present") {
+    endDate;
+  }
   startDate = new Date(startDate);
   endDate = new Date(endDate);
 
@@ -39,4 +42,29 @@ export function calculateDuration(
       fractionYears === 0.5 ? "1/2" : fractionYears.toString();
     return `${wholeYears} ${halfYears} years`;
   }
+}
+export function formatDate(dateString: string): string {
+  if (!dateString) return dateString;
+  if (dateString === "Present") return dateString;
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const [day, month, year] = dateString.split("/").map(Number);
+
+  const formattedMonth = months[month - 1];
+  const formattedYear = year;
+
+  return `${formattedMonth} ${formattedYear}`;
 }

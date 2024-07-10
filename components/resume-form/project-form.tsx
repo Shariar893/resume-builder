@@ -142,7 +142,7 @@ const ProjectForm = ({
                         <TextEditor
                           disabled={field.disabled!}
                           value={field.value!}
-                          fieldName="description"
+                          fieldName="projectDescription"
                         />
                       </FormControl>
                       <FormMessage />

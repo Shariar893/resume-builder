@@ -1,14 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
-import Link from "next/link";
-
-import useResumeStore from "@/store/resumeStore";
-import { ProfileSchema } from "@/constants/schema";
-
-import { Button } from "@/components/ui/button";
+import TextEditor from "@/components/TextEditor";
 import {
   Form,
   FormControl,
@@ -18,10 +10,65 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ProfileSchema } from "@/constants/schema";
 import { Profile } from "@/constants/types";
-import TextEditor from "@/components/TextEditor";
+import useFormField from "@/hook/use-form-field";
+import useFormStore from "@/store/resumeStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const ProfileFormField = ({
+  name,
+  control,
+  placeholder,
+  inputType,
+  className,
+}: {
+  name: keyof Profile;
+  control: any;
+  placeholder: string;
+  inputType?: "textarea" | "text";
+  className?: string;
+}) => {
+  const { field, error } = useFormField({ name, control });
+
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={() => (
+        <FormItem className={className}>
+          <FormLabel>{name.charAt(0).toUpperCase() + name.slice(1)}</FormLabel>
+          <FormControl>
+            {
+              {
+                textarea: (
+                  <TextEditor
+                    fieldName={name}
+                    value={field.value}
+                    disabled={false}
+                  />
+                ),
+                text: (
+                  <Input
+                    {...field}
+                    placeholder={placeholder}
+                    type="text"
+                    className="w-full"
+                  />
+                ),
+              }[inputType || "text"]
+            }
+          </FormControl>
+          <FormMessage>{error?.message}</FormMessage>
+        </FormItem>
+      )}
+    />
+  );
+};
+
 const ProfileForm = () => {
-  const profile = useResumeStore((state) => state.profile);
+  const profile = useFormStore((state) => state.profile);
   const form = useForm<Profile>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: profile,
@@ -37,110 +84,53 @@ const ProfileForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2 w-[500px]"
       >
-        <FormField
-          control={form.control}
+        <ProfileFormField
           name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Sara" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
           control={form.control}
+          placeholder="Sara"
+        />
+        <ProfileFormField
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="dhanush@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
           control={form.control}
+          placeholder="dhanush@gmail.com"
+        />
+        <ProfileFormField
           name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="+91 9089908978" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
           control={form.control}
+          placeholder="+91 9089908978"
+        />
+        <ProfileFormField
           name="linkedin"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Linkedin Profile</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://linkedin.com/dhanushtheijas08"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
           control={form.control}
+          placeholder="https://linkedin.com/dhanushtheijas08"
+        />
+        <ProfileFormField
           name="github"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Github Profile</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://github.com/dhanushtheijas08"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
           control={form.control}
+          placeholder="https://github.com/dhanushtheijas08"
+        />
+        <ProfileFormField
           name="website"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Potfilio</FormLabel>
-              <FormControl>
-                <Input placeholder="dhanushtheijas.vercel.app" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          control={form.control}
+          placeholder="dhanushtheijas.vercel.app"
+        />
+        <ProfileFormField
+          name="address"
+          control={form.control}
+          placeholder="No.1, 2nd Street, Chennai, India"
+        />
+        <ProfileFormField
+          name="role"
+          control={form.control}
+          placeholder="Front End Developer"
         />
 
-        <FormField
+        <ProfileFormField
+          name="summary"
           control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem className="sm:col-span-2">
-              <FormLabel>Address</FormLabel>
-              <FormControl>
-                <TextEditor
-                  disabled={field.disabled!}
-                  value={field.value!}
-                  fieldName="address"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="Your summary here"
+          inputType="textarea"
+          className="col-span-2"
         />
       </form>
     </Form>
