@@ -55,7 +55,7 @@ const SectionCard = ({
       </div>
       <div className="relative pl-4 pr-8 h-[4.5rem] gap-4 rounded-[2px] border bg-card text-card-foreground shadow-sm flex w-full">
         <div
-          className="self-center space-y-[2.5px] flex-1"
+          className="self-center space-y-1.5 flex-1"
           onClick={() => {
             setIsEducationFormOpen(true);
             setSelectedEducation?.(id);

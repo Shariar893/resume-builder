@@ -5,6 +5,7 @@ import SectionCard from "@/components/section-card";
 import SectionHeading from "@/components/section-heading";
 import { Separator } from "@/components/ui/separator";
 import { Project as ProjectType } from "@/constants/types";
+import { formatLink } from "@/lib/utils";
 import useResumeStore from "@/store/resumeStore";
 import { useState } from "react";
 
@@ -40,7 +41,7 @@ const Project = () => {
               id={project.projectId}
               onDelete={deleteProject}
               primaryHeading={project.projectName}
-              secondaryHeading={project.deploymentLink || ""}
+              secondaryHeading={formatLink(project.deploymentLink || "")}
               setIsEducationFormOpen={setIsProjectFormOpen}
               setSelectedEducation={setSelectedProject}
             />
