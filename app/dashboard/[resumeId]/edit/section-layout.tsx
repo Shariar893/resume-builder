@@ -10,7 +10,7 @@ type SectionLayoutProps = {
 
 const SectionLayout = ({ children, icon, title }: SectionLayoutProps) => {
   return (
-    <section className="flex flex-col gap-6 w-[500px]">
+    <section className="flex flex-col gap-6">
       <SectionHeading title={title} icon={icon} />
       {children}
       <Separator />

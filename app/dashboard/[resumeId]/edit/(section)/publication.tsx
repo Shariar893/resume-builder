@@ -8,7 +8,7 @@ import { Publication as PublicationType } from "@/constants/types";
 import useResumeStore from "@/store/resumeStore";
 import { useState } from "react";
 
-const Publication = () => {
+const Publication = ({ isLast = false }: { isLast: boolean | undefined }) => {
   const publications = useResumeStore((state) => state.publications);
   const deletePublication = useResumeStore((state) => state.deletePublication);
   const setPublication = useResumeStore((state) => state.setPublications);
@@ -65,7 +65,7 @@ const Publication = () => {
         setIsOpened={setIsPublicationFormOpen}
         setSelectedEducation={setSelectedPublication}
       />
-      <Separator />
+      {!isLast && <Separator />}
     </section>
   );
 };

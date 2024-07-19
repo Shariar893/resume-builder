@@ -82,7 +82,7 @@ const ProfileForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2 w-[500px]"
+        className="grid gap-y-6 gap-x-4 grid-cols-1 sm:grid-cols-2"
       >
         <ProfileFormField
           name="name"
@@ -125,13 +125,13 @@ const ProfileForm = () => {
           placeholder="Front End Developer"
         />
 
-        <ProfileFormField
+        {/* <ProfileFormField
           name="summary"
           control={form.control}
           placeholder="Your summary here"
           inputType="textarea"
           className="col-span-2"
-        />
+        /> */}
       </form>
     </Form>
   );
