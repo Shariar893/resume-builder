@@ -1,8 +1,10 @@
-import Image from "next/image";
 import Header from "@/components/header";
 import SelectDialog from "@/components/select-template-dialog";
 import BlurText from "@/components/ui/blur-text";
+import Image from "next/image";
+import Link from "next/link";
 import HeroSectionBackground from "./hero-section-background";
+import { Heart } from "lucide-react";
 
 const Page = () => {
   return (
@@ -48,6 +50,32 @@ const Page = () => {
       {/* <div className="mt-28">
         <KeyFeatures />
       </div> */}
+
+      <footer className="relative py-6 md:py-0">
+        <div className="absolute top-0 h-px w-full footer" />
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
+          <span className="text-xs sm:text-base font-space-grotesk text-muted-foreground/85">
+            designed and developed by{" "}
+            <Link
+              href=""
+              className="text-muted-foreground underline underline-offset-4 font-medium"
+            >
+              dhansuh theijas
+            </Link>
+          </span>
+        </div>
+      </footer>
+      {/* <footer className="mt-auto h-20 flex flex-col items-center sm:items-start px-5 text-muted-foreground/80 gap-8">
+        <span className="font-space-grotesk">
+          designed and developed by{" "}
+          <Link
+            href=""
+            className="text-muted-foreground underline underline-offset-4 font-medium"
+          >
+            dhansuh theijas
+          </Link>
+        </span>
+      </footer> */}
     </div>
   );
 };

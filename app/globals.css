@@ -156,3 +156,10 @@
 .sapke {
   transform: translateY(0) scale(1.1);
 }
+.footer {
+  background: radial-gradient(
+    50% 100% at 50% 100%,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
