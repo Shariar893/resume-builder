@@ -9,3 +9,8 @@ export function formatLink(url: string) {
   url = url.replace(/\/$/, "");
   return url.split("/")[0];
 }
+
+export function getCurrentPath(url: string) {
+  if (url === "") return "";
+  return url.split("/").at(-1);
+}

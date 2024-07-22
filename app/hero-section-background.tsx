@@ -8,7 +8,7 @@ interface BackgroundGridProps {
   fade?: boolean;
 }
 
-const NewBg = ({
+const HeroSectionBackground = ({
   color = "#7877c64d",
   cellSize = "25px",
   strokeWidth = "3px",
@@ -43,4 +43,4 @@ const NewBg = ({
   );
 };
 
-export default NewBg;
+export default HeroSectionBackground;

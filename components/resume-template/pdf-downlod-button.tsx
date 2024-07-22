@@ -13,16 +13,10 @@ const PDFDownloadButton = () => {
       if (!response.ok) {
         throw new Error("PDF generation failed");
       }
-
-      // Get the blob from the response
       const blob = await response.blob();
-
-      // Create a URL for the blob
       const url = window.URL.createObjectURL(blob);
 
-      // Clean up
       window.URL.revokeObjectURL(url);
-      // document.body.removeChild(a);
     } catch (error) {
       console.error("Error downloading PDF:", error);
       alert("Failed to download PDF. Please try again.");

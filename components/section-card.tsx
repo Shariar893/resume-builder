@@ -1,19 +1,18 @@
 "use client";
 
 import { Trash2Icon } from "lucide-react";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Model,
+  ModelClose,
+  ModelContent,
+  ModelDescription,
+  ModelFooter,
+  ModelHeader,
+  ModelTitle,
+  ModelTrigger,
+} from "./responsive-model";
+import { Button } from "./ui/button";
 
 type SectionCardProps = {
   id: string;
@@ -34,8 +33,8 @@ const SectionCard = ({
 }: SectionCardProps) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex gap-1 " draggable={true}>
-      <div className="cursor-grab h-[4.5rem] rounded-[2px] flex items-center border border-accent w-[3rem] justify-center">
+    <div className="flex gap-1" draggable={true}>
+      <div className="cursor-grab rounded-[2px] flex items-center border border-accent w-[3rem] justify-center">
         <svg
           width="15"
           height="15"
@@ -53,51 +52,57 @@ const SectionCard = ({
           ></path>
         </svg>
       </div>
-      <div className="relative pl-4 pr-8 h-[4.5rem] gap-4 rounded-[2px] border bg-card text-card-foreground shadow-sm flex w-full">
+      <div className="relative pl-4 pr-8 py-2.5 gap-4 rounded-[2px] border bg-card text-card-foreground shadow-sm flex w-full">
         <div
-          className="self-center space-y-1.5 flex-1"
+          className="self-center space-y-1.5 md:space-y-1 lg:space-y-1.5 flex-1"
           onClick={() => {
             setIsEducationFormOpen(true);
             setSelectedEducation?.(id);
           }}
         >
-          <h2 className="text-2xl text-primary/80 font-semibold leading-none tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-xl lg:text-2xl text-primary/80 font-semibold leading-none tracking-tight">
             {primaryHeading}
           </h2>
-          <p className="text-primary/50">{secondaryHeading}</p>
+          <p className="text-sm sm:text-base text-primary/50 min-h-1">
+            {secondaryHeading}
+          </p>
         </div>
-
-        <AlertDialog open={open}>
-          <AlertDialogTrigger
-            className="self-center"
-            onClick={() => setOpen(true)}
-          >
+        <Model open={open}>
+          <ModelTrigger onClick={() => setOpen(true)}>
             <Trash2Icon className="size-6 hover:text-muted-foreground cursor-pointer" />
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
+          </ModelTrigger>
+          <ModelContent className="w-full">
+            <ModelHeader className="space-y-2 mb-2">
+              <ModelTitle className="text-center md:text-left">
+                Are you absolutely sure?
+              </ModelTitle>
+              <ModelDescription className="max-w-sm text-center mx-auto md:text-left md:mx-0">
                 This action cannot be undone. This will permanently delete your
                 account and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter className="sm:space-x-3.5">
-              <AlertDialogCancel onClick={() => setOpen(false)}>
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction
-                className=""
+              </ModelDescription>
+            </ModelHeader>
+            <ModelFooter className="flex flex-col sm:flex-row md:flex-row-reverse w-full gap-2.5 sm:justify-center items-center md:justify-start">
+              <Button
+                variant="destructive"
+                className="w-full max-w-sm sm:max-w-[15rem] md:w-fit"
                 onClick={() => {
                   onDelete(id);
                   setOpen(false);
                 }}
               >
                 Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+              </Button>
+              <ModelClose onClick={() => setOpen(false)} asChild>
+                <Button
+                  variant="outline"
+                  className="w-full max-w-sm sm:max-w-[15rem] md:w-fit"
+                >
+                  Close
+                </Button>
+              </ModelClose>
+            </ModelFooter>
+          </ModelContent>
+        </Model>
       </div>
     </div>
   );

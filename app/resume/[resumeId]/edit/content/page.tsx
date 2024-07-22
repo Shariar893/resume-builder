@@ -1,23 +1,20 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-
 import ProfileForm from "@/components/resume-form/profile-form";
-import Certification from "./(section)/certification";
+import Resume from "@/components/resume-template/resume";
 import Education from "./(section)/education";
 import Experience from "./(section)/experience";
-import Language from "./(section)/language";
 import Project from "./(section)/project";
-import Publication from "./(section)/publication";
 import Skill from "./(section)/skill";
+import Language from "./(section)/language";
+import Certification from "./(section)/certification";
+import Publication from "./(section)/publication";
 
-import Resume from "@/components/resume-template/resume";
-import Footer from "./footer";
-
-const EditResume = () => {
+const EditResume = ({}) => {
   return (
-    <div className="flex max-h-screen overflow-hidden w-full">
-      <div className="flex w-full">
-        <ScrollArea className="h-screen w-full">
-          <div className="space-y-6 p-4">
+    <>
+      <div className="flex w-full xl:max-w-5xl">
+        <ScrollArea className="h-screen w-full ">
+          <div className="space-y-6 p-4 md:w-[45vw] xl:w-full mb-20 md:mb-0">
             <ProfileForm />
             <Education />
             <Experience />
@@ -32,8 +29,7 @@ const EditResume = () => {
       <div className="max-w-full hidden md:block">
         <Resume />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

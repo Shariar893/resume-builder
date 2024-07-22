@@ -2,9 +2,12 @@
 
 import React, { forwardRef, useRef } from "react";
 
-import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { cn } from "@/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 // eslint-disable-next-line react/display-name
 const Circle = forwardRef<
@@ -109,43 +112,41 @@ const DownloadIcon = ({ className }: { className?: string }) => {
         containerRef={containerRef}
         fromRef={div1Ref}
         toRef={div6Ref}
-        duration={3}
+        duration={5}
       />
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div2Ref}
         toRef={div6Ref}
-        duration={3}
+        duration={5}
       />
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div3Ref}
         toRef={div6Ref}
-        duration={3}
+        duration={5}
       />
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div4Ref}
         toRef={div6Ref}
-        duration={3}
+        duration={5}
       />
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div5Ref}
         toRef={div6Ref}
-        duration={3}
+        duration={5}
       />
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div6Ref}
         toRef={div7Ref}
-        duration={3}
+        duration={5}
       />
     </div>
   );
 };
-
-export default DownloadIcon;
 
 const Icons = {
   notion: () => (
@@ -585,3 +586,44 @@ const Icons = {
     </svg>
   ),
 };
+
+const MultiFormatDownload = () => {
+  return (
+    <div className="transform-gpu group relative shadow-[0_-20px_80px_-50px_#7877c64d_inset] border-[1px] border-[rgba(255, 255, 255, .1)] w-[35rem] rounded-md bg-[#09090b] h-[30rem] flex overflow-hidden lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3">
+      <div className="h-full w-full linear-mask-2 absolute">
+        <DownloadIcon className="border-none w-full" />
+      </div>
+
+      <div className="justify-end text-center pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10">
+        <h3 className="text-xl font-semibold  text-neutral-400">
+          Multiple download formats
+        </h3>
+        <p className="max-w-lg text-neutral-700">
+          Export your resume in various file types to suit different needs.
+        </p>
+      </div>
+
+      <div
+        className={cn(
+          "pointer-events-none absolute bottom-0 flex w-full translate-y-10 translate-x-1/4 transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+        )}
+      >
+        <Button
+          variant="ghost"
+          asChild
+          size="sm"
+          className="pointer-events-auto"
+        >
+          <Link href="/quick-build">
+            Start Building
+            <ArrowRightIcon className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-neutral-800/10" />
+    </div>
+  );
+};
+
+export default MultiFormatDownload;

@@ -37,34 +37,38 @@ type RootModelProps = BaseProps & {
 type ModelProps = BaseProps & {
   className?: string;
   asChild?: true;
+  onClick?: () => void;
 };
 
 const desktop = "(min-width: 768px)";
-
 const Model = ({ children, ...props }: RootModelProps) => {
   const isDesktop = useMediaQuery(desktop);
   const Model = isDesktop ? Dialog : Drawer;
-
   return <Model {...props}>{children}</Model>;
 };
 
-const ModelTrigger = ({ className, children, ...props }: ModelProps) => {
+const ModelTrigger = ({
+  className,
+  children,
+  onClick,
+  ...props
+}: ModelProps) => {
   const isDesktop = useMediaQuery(desktop);
   const ModelTrigger = isDesktop ? DialogTrigger : DrawerTrigger;
 
   return (
-    <ModelTrigger className={className} {...props}>
+    <ModelTrigger {...props} className={className} onClick={onClick}>
       {children}
     </ModelTrigger>
   );
 };
 
-const ModelClose = ({ className, children, ...props }: ModelProps) => {
+const ModelClose = ({ className, children, onClick, ...props }: ModelProps) => {
   const isDesktop = useMediaQuery(desktop);
   const ModelClose = isDesktop ? DialogClose : DrawerClose;
 
   return (
-    <ModelClose className={className} {...props}>
+    <ModelClose {...props} className={className} onClick={onClick}>
       {children}
     </ModelClose>
   );
@@ -75,7 +79,7 @@ const ModelContent = ({ className, children, ...props }: ModelProps) => {
   const ModelContent = isDesktop ? DialogContent : DrawerContent;
 
   return (
-    <ModelContent className={className} {...props}>
+    <ModelContent {...props} className={className}>
       {children}
     </ModelContent>
   );
@@ -86,7 +90,7 @@ const ModelDescription = ({ className, children, ...props }: ModelProps) => {
   const ModelDescription = isDesktop ? DialogDescription : DrawerDescription;
 
   return (
-    <ModelDescription className={className} {...props}>
+    <ModelDescription {...props} className={className}>
       {children}
     </ModelDescription>
   );
@@ -97,7 +101,7 @@ const ModelHeader = ({ className, children, ...props }: ModelProps) => {
   const ModelHeader = isDesktop ? DialogHeader : DrawerHeader;
 
   return (
-    <ModelHeader className={className} {...props}>
+    <ModelHeader {...props} className={className}>
       {children}
     </ModelHeader>
   );

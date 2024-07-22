@@ -28,7 +28,7 @@ const Language = () => {
   }
 
   return (
-    <section className="flex flex-col gap-6 w-[500px]">
+    <section className="flex flex-col gap-6 w-full">
       <SectionHeading title="Language" icon="language" />
 
       {languages.length > 0 && (

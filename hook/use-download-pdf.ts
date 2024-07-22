@@ -1,13 +1,34 @@
+import useResumeStore from "@/store/resumeStore";
 import { useState } from "react";
 
 export const useDownloadPdf = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const {
+    profile,
+    educations,
+    experiences,
+    projects,
+    skills,
+    languages,
+    publications,
+    certifications,
+  } = useResumeStore();
 
   const handleDownload = async () => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/generate-resume", {
         method: "POST",
+        body: JSON.stringify({
+          profile,
+          educations,
+          experiences,
+          projects,
+          skills,
+          languages,
+          publications,
+          certifications,
+        }),
       });
 
       if (!response.ok) {

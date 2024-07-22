@@ -20,12 +20,22 @@ import ShinyButton from "./ShinyButton";
 import img1 from "@/public/resume-templates/001.jpg";
 import Image from "next/image";
 import { ScrollArea } from "./ui/scroll-area";
-import { Toggle } from "@/components/ui/toggle";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/resumeStore";
+import {
+  Model,
+  ModelBody,
+  ModelClose,
+  ModelContent,
+  ModelDescription,
+  ModelFooter,
+  ModelHeader,
+  ModelTitle,
+  ModelTrigger,
+} from "./responsive-model";
 
 const images = [
   { src: img1, id: 1 },
@@ -61,67 +71,67 @@ const SelectDialog = () => {
   ));
 
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Model>
+      <ModelTrigger>
         <ShinyButton>
           Start Building
           <ArrowRight className="ml-2 h-5 w-5" />
         </ShinyButton>
-      </DialogTrigger>
-      <DialogContent className="max-w-[95vw]">
-        <DialogHeader className="space-y-5">
-          <DialogTitle className="text-4xl text-center">
+      </ModelTrigger>
+      <ModelContent className="md:max-w-[95vw] md:max-h-[95vh] p-1.5 xl:p-5">
+        <ModelHeader className="space-y-2.5">
+          <ModelTitle className="text-xl text-center">
             Choose Your Template
-          </DialogTitle>
-          <div className="my-6">
+          </ModelTitle>
+          <div className="sm:px-4">
             <Select>
-              <SelectTrigger className="w-[280px] text-xl">
+              <SelectTrigger className="text-base mx-auto sm:max-w-[280px] sm:mx-0">
                 <SelectValue placeholder="Job Type" />
               </SelectTrigger>
               <SelectContent defaultValue={"all"}>
                 <SelectItem
                   value="all"
                   defaultChecked={true}
-                  className="text-xl"
+                  className="text-base"
                 >
                   All
                 </SelectItem>
-                <SelectItem value="frontend" className="text-xl">
+                <SelectItem value="frontend" className="text-base">
                   Frontend
                 </SelectItem>
-                <SelectItem value="backend" className="text-xl">
+                <SelectItem value="backend" className="text-base">
                   Backend
                 </SelectItem>
-                <SelectItem value="fullstack" className="text-xl">
+                <SelectItem value="fullstack" className="text-base">
                   Full Stack
                 </SelectItem>
               </SelectContent>
             </Select>
           </div>
-        </DialogHeader>
+        </ModelHeader>
 
         <ScrollArea>
-          <div className="h-[65vh] grid grid-cols-3 gap-10 py-5 px-5 place-items-center">
+          <div className="h-[65vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 py-5 px-5 place-items-center">
             {renderTemplate}
           </div>
         </ScrollArea>
 
-        <DialogFooter>
+        <ModelFooter className="md:-translate-y-3.5 lg:-translate-y-2.5">
           <Button
-            size="lg"
+            size="sm"
             disabled={!resumeTemplateId}
             onClick={() => {
               if (resumeTemplateId) {
                 setResumeId(`${resumeTemplateId}`);
-                router.push(`/dashboard/${resumeTemplateId}/edit`);
+                router.push(`/resume/${resumeTemplateId}/edit/content`);
               }
             }}
           >
             Continue
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </ModelFooter>
+      </ModelContent>
+    </Model>
   );
 };
 

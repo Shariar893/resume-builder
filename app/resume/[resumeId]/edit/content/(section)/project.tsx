@@ -30,7 +30,7 @@ const Project = () => {
   }
 
   return (
-    <section className="flex flex-col gap-6 w-[500px]">
+    <section className="flex flex-col gap-6 w-full">
       <SectionHeading title="Project" icon="project" />
 
       {projects.length > 0 && (

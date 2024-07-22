@@ -34,8 +34,6 @@ const Resume = () => {
                   ref={resumeRef}
                   style={{
                     backgroundColor: "white",
-                    width: "210mm",
-                    height: "297mm",
                     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
                     transformOrigin: "top left",
                   }}

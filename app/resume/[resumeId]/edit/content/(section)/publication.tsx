@@ -33,7 +33,7 @@ const Publication = ({ isLast = false }: { isLast: boolean | undefined }) => {
   }
 
   return (
-    <section className="flex flex-col gap-6 w-[500px]">
+    <section className="flex flex-col gap-6 w-full">
       <SectionHeading title="Publication" icon="publication" />
 
       {publications.length > 0 && (

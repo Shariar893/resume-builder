@@ -47,6 +47,7 @@
 // export default KeyFeatures;
 "use client";
 import { BentoCard, BentoGrid } from "@/components/features/bentoGrid";
+import MultiFormatDownload from "@/components/features/download-icon";
 import FlashIcon from "@/components/features/flash-icon";
 import QuickBuild from "@/components/features/quick-build";
 import { FileTextIcon, GlobeIcon, AArrowDownIcon } from "lucide-react";
@@ -88,14 +89,12 @@ const features = [
 
 const KeyFeatures = () => {
   return (
-    <>
-      <QuickBuild />
-      <BentoGrid className="lg:grid-rows-3 mt-32 px-6">
-        {features.map((feature) => (
-          <BentoCard key={feature.name} {...feature} />
-        ))}
-      </BentoGrid>
-    </>
+    <section className="">
+      <div className="grid">
+        <QuickBuild />
+        <MultiFormatDownload />
+      </div>
+    </section>
   );
 };
 

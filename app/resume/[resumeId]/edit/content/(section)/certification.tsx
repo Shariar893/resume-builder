@@ -37,7 +37,7 @@ const Certification = () => {
   }
 
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-6 w-full">
       <SectionHeading title="Certification" icon="certification" />
 
       {certifications.length > 0 && (
