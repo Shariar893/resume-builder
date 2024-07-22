@@ -12,11 +12,11 @@ const Page = () => {
 
       <Header />
       <BlurText>
-        <main className="px-4 mt-10 flex flex-col items-center gap-3.5 sm:gap-6 w-full overflow-hidden mb-20">
-          <h1 className="text-2xl sm:text-5xl md:text-6xl font-space-grotesk font-semibold text-center">
+        <main className="px-4 mt-10 flex flex-col items-center gap-6 w-full overflow-hidden mb-20">
+          <h1 className="text-center font-space-grotesk font-semibold bg-gradient-to-br bg-clip-text leading-none tracking-tighter text-transparent from-white from-5% to-white/40 text-3xl sm:text-5xl md:text-6xl">
             Create Your Professional <br /> Resume in Minutes
           </h1>
-          <p className="text-center mb-3 sm:mb-0 text-xs sm:text-base text-pretty text-secondary-foreground font-space-grotesk font-light">
+          <p className="text-center text-xs sm:text-base text-pretty text-secondary-foreground font-space-grotesk font-light">
             Say goodbye to formatting struggles. Our intuitive <br /> builder
             creates ATS-friendly resumes in minutes, not hours.
           </p>
