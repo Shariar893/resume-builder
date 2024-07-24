@@ -1,10 +1,10 @@
 "use client";
 
-import ResumeTemplate3 from "@/components/resume-template/resume-template-2/index";
 import { useRef } from "react";
-import Draggable from "react-draggable";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import Draggable from "react-draggable";
 import ResumeToolKit from "./resume-tool-kit";
+import MyResume from "./resume-template";
 
 const Resume = () => {
   const resumeRef = useRef(null);
@@ -38,7 +38,7 @@ const Resume = () => {
                     transformOrigin: "top left",
                   }}
                 >
-                  <ResumeTemplate3 />
+                  <MyResume />
                 </div>
               </Draggable>
             </TransformComponent>

@@ -2,6 +2,7 @@ import * as z from "zod";
 
 export const ProfileSchema = z.object({
   id: z.number(),
+  resumeIdentifier: z.string(),
   name: z.string(),
   email: z.string(),
   phone: z.string().optional(),
@@ -15,6 +16,7 @@ export const ProfileSchema = z.object({
 
 export const EducationSchema = z.object({
   eduId: z.string(),
+  resumeIdentifier: z.string(),
   institutionName: z.string(),
   degree: z.string(),
   fieldOfStudy: z.string(),
@@ -26,6 +28,7 @@ export const EducationSchema = z.object({
 
 export const ExperienceSchema = z.object({
   expId: z.string(),
+  resumeIdentifier: z.string(),
   role: z.string(),
   company: z.string(),
   location: z.string(),
@@ -36,6 +39,7 @@ export const ExperienceSchema = z.object({
 
 export const ProjectSchema = z.object({
   projectId: z.string(),
+  resumeIdentifier: z.string(),
   projectName: z.string(),
   deploymentLink: z.string().optional(),
   repoLink: z.string().optional(),
@@ -44,18 +48,21 @@ export const ProjectSchema = z.object({
 
 export const SkillSchema = z.object({
   skillId: z.string(),
+  resumeIdentifier: z.string(),
   skillName: z.string(),
   level: z.string().optional(),
 });
 
 export const LanguageSchema = z.object({
   languageId: z.string(),
+  resumeIdentifier: z.string(),
   languageName: z.string(),
   proficiency: z.string().optional(),
 });
 
 export const CertificationSchema = z.object({
   certificationId: z.string(),
+  resumeIdentifier: z.string(),
   certificationName: z.string(),
   certificationAuthority: z.string(),
   certificationProof: z.string().optional(),
@@ -65,6 +72,7 @@ export const CertificationSchema = z.object({
 
 export const PublicationSchema = z.object({
   publicationId: z.string(),
+  resumeIdentifier: z.string(),
   publicationName: z.string(),
   publicationLink: z.string().optional(),
   publicationPublisher: z.string().optional(),

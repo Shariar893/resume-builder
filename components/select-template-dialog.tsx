@@ -2,40 +2,31 @@
 import { ArrowRight } from "lucide-react";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ShinyButton from "./ShinyButton";
-import img1 from "@/public/resume-templates/001.jpg";
-import Image from "next/image";
-import { ScrollArea } from "./ui/scroll-area";
-import { useState } from "react";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import img1 from "@/public/resume-templates/001.jpg";
 import useResumeStore from "@/store/resumeStore";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   Model,
-  ModelBody,
-  ModelClose,
   ModelContent,
-  ModelDescription,
   ModelFooter,
   ModelHeader,
   ModelTitle,
   ModelTrigger,
 } from "./responsive-model";
+import ShinyButton from "./ShinyButton";
+import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 
 const images = [
   { src: img1, id: 1 },
@@ -69,7 +60,13 @@ const SelectDialog = () => {
       />
     </div>
   ));
-
+  const user = null;
+  const createNewResume = () => {
+    if (!user && resumeTemplateId) {
+      setResumeId(`${resumeTemplateId}`);
+      router.push(`/resume/${resumeTemplateId}/edit/content`);
+    }
+  };
   return (
     <Model>
       <ModelTrigger>
@@ -120,12 +117,7 @@ const SelectDialog = () => {
           <Button
             size="sm"
             disabled={!resumeTemplateId}
-            onClick={() => {
-              if (resumeTemplateId) {
-                setResumeId(`${resumeTemplateId}`);
-                router.push(`/resume/${resumeTemplateId}/edit/content`);
-              }
-            }}
+            onClick={createNewResume}
           >
             Continue
           </Button>
