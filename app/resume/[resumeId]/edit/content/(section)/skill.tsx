@@ -17,8 +17,9 @@ const Skill = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   let defaultVal: SkillType = {
     skillId: "",
-    skillName: "",
-    level: "",
+    skillCategories: "",
+    skillList: "",
+    resumeIdentifier: "",
   };
 
   if (selectedSkill) {
@@ -36,8 +37,8 @@ const Skill = () => {
               key={skill.skillId}
               id={skill.skillId}
               onDelete={deleteSkill}
-              primaryHeading={skill.skillName}
-              secondaryHeading={skill.level || ""}
+              primaryHeading={skill.skillCategories}
+              secondaryHeading={skill.skillList || ""}
               setIsEducationFormOpen={setIsSkillFormOpen}
               setSelectedEducation={setSelectedSkill}
             />

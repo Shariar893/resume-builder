@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 type SectionCardProps = {
   id: string;
   primaryHeading: string;
-  secondaryHeading: string;
+  secondaryHeading: string | string[];
   onDelete: (id: string) => void;
   setIsEducationFormOpen: Dispatch<SetStateAction<boolean>>;
   setSelectedEducation?: Dispatch<SetStateAction<string | null>>;
@@ -54,18 +54,24 @@ const SectionCard = ({
       </div>
       <div className="relative pl-4 pr-8 py-2.5 gap-4 rounded-[2px] border bg-card text-card-foreground shadow-sm flex w-full">
         <div
-          className="self-center space-y-1.5 md:space-y-1 lg:space-y-1.5 flex-1"
+          className="self-center space-y-1.5 md:space-y-1 lg:space-y-1.5 flex-1 education-container"
           onClick={() => {
             setIsEducationFormOpen(true);
             setSelectedEducation?.(id);
           }}
         >
-          <h2 className="text-xl sm:text-2xl md:text-xl lg:text-2xl text-primary/80 font-semibold leading-none tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-xl lg:text-2xl text-primary/80 font-semibold leading-none tracking-tight truncate-text">
             {primaryHeading}
           </h2>
-          <p className="text-sm sm:text-base text-primary/50 min-h-1">
-            {secondaryHeading}
-          </p>
+          {Array.isArray(secondaryHeading) ? (
+            <p className="text-sm sm:text-base text-primary/50 min-h-1 truncate-text">
+              {secondaryHeading.join(", ")}
+            </p>
+          ) : (
+            <p className="text-sm sm:text-base text-primary/50 min-h-1 truncate-text">
+              {secondaryHeading}
+            </p>
+          )}
         </div>
         <Model open={open}>
           <ModelTrigger onClick={() => setOpen(true)}>

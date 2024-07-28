@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type ProjectFormProps = {
   isOpened: boolean;
@@ -45,6 +47,9 @@ const ProjectForm = ({
   mode,
   defaultVal,
 }: ProjectFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
+
   const form = useForm<Project>({
     resolver: zodResolver(ProjectSchema),
     defaultValues: defaultVal,
@@ -53,15 +58,19 @@ const ProjectForm = ({
     form.reset(defaultVal);
   }, [defaultVal, form]);
 
+  // Resume Builder Applications
+  // https://resume-builder-app.com
+  // https://github.com/username/resume-builder
+  // - Developed a web application to create and download professional resumes using Next.js 14, Tailwind CSS, PostgreSQL, Prisma, and React Redux.
+  // - Implemented real-time resume preview functionality to allow users to see updates instantly as they enter their data.
+  // - Integrated PDF generation using Puppeteer for users to download high-quality, print-ready resumes.
   function onSubmit(data: Project) {
     if (selectedProject) {
-      console.log(data);
-
       onEdit(data.projectId, {
         ...data,
       });
     } else {
-      onCreate({ ...data, projectId: uuidv4() });
+      onCreate({ ...data, projectId: uuidv4(), resumeIdentifier: pathName });
     }
     setIsOpened(false);
   }

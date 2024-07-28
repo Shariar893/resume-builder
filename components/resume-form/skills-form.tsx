@@ -32,6 +32,8 @@ import {
 } from "@/components/ui/select";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type SkillFormProps = {
   isOpened: boolean;
@@ -52,6 +54,8 @@ const SkillForm = ({
   mode,
   defaultVal,
 }: SkillFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
   const form = useForm<Skill>({
     resolver: zodResolver(SkillSchema),
     defaultValues: defaultVal,
@@ -69,7 +73,7 @@ const SkillForm = ({
         ...data,
       });
     } else {
-      onCreate({ ...data, skillId: uuidv4() });
+      onCreate({ ...data, skillId: uuidv4(), resumeIdentifier: pathName });
     }
     setIsOpened(false);
   }
@@ -89,15 +93,15 @@ const SkillForm = ({
               >
                 <FormField
                   control={form.control}
-                  name="skillName"
+                  name="skillCategories"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Skill Name</FormLabel>
+                      <FormLabel>Skill category</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           className="text-base"
-                          placeholder="Company Name"
+                          placeholder="Programing Language"
                         />
                       </FormControl>
                       <FormMessage />
@@ -106,29 +110,16 @@ const SkillForm = ({
                 />
                 <FormField
                   control={form.control}
-                  name="level"
+                  name="skillList"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Skill Level</FormLabel>
+                      <FormLabel>Skill List</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          disabled={field.disabled}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Skill Level" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="beginner">Beginner</SelectItem>
-                            <SelectItem value="intermediate">
-                              Intermediate
-                            </SelectItem>
-                            <SelectItem value="advanced">Advanced</SelectItem>
-                            <SelectItem value="undefined">
-                              Hide Level
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <Input
+                          {...field}
+                          className="text-base"
+                          placeholder="C/C++, Python, Javascript, Typescript"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -150,3 +141,69 @@ const SkillForm = ({
 };
 
 export default SkillForm;
+
+{
+  /* <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
+  <ModelContent>
+    <ModelHeader className="font-semibold text-xl">Skill Section</ModelHeader>
+    <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full md:px-1 mb-2 md:mb-1 flex flex-col gap-4"
+        >
+          <FormField
+            control={form.control}
+            name="skillName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Skill Name</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    className="text-base"
+                    placeholder="Company Name"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="level"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Skill Level</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    disabled={field.disabled}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Skill Level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="beginner">Beginner</SelectItem>
+                      <SelectItem value="intermediate">Intermediate</SelectItem>
+                      <SelectItem value="advanced">Advanced</SelectItem>
+                      <SelectItem value="undefined">Hide Level</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <ModelFooter className="p-0 col-span-2">
+            <Button type="submit" className="w-full mt-2">
+              Save changes
+            </Button>
+          </ModelFooter>
+        </form>
+      </Form>
+    </ModelBody>
+  </ModelContent>
+</Model>; */
+}

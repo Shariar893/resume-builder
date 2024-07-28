@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type ExperienceFormProps = {
   isOpened: boolean;
@@ -45,6 +47,9 @@ const ExperienceForm = ({
   mode,
   defaultVal,
 }: ExperienceFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
+
   const form = useForm<Experience>({
     resolver: zodResolver(ExperienceSchema),
     defaultValues: defaultVal,

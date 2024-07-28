@@ -22,7 +22,7 @@ const EditResume = ({}) => {
             <Skill />
             <Language />
             <Certification />
-            <Publication isLast />
+            {/* <Publication isLast /> */}
           </div>
         </ScrollArea>
       </div>

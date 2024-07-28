@@ -25,6 +25,7 @@ const Experience = () => {
     description: "",
     location: "",
     expId: "",
+    resumeIdentifier: "",
   };
 
   if (selectedExperience) {

@@ -19,6 +19,7 @@ const Language = () => {
     languageId: "",
     languageName: "",
     proficiency: "",
+    resumeIdentifier: "",
   };
 
   if (selectedLanguage) {

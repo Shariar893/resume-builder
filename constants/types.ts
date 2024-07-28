@@ -16,7 +16,7 @@ export type Skill = z.infer<typeof SkillSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
 export type Language = z.infer<typeof LanguageSchema>;
 export type Certification = z.infer<typeof CertificationSchema>;
-export type Publication = z.infer<typeof PublicationSchema>;
+// export type Publication = z.infer<typeof PublicationSchema>;
 export type Resume = {
   profile: Profile | undefined;
   experiences: Experience[];
@@ -25,7 +25,7 @@ export type Resume = {
   projects: Project[];
   languages: Language[];
   certifications: Certification[];
-  publications: Publication[];
+  // publications?: Publication[];
   resumeId: string | null;
 };
 
@@ -40,7 +40,7 @@ export type ResumeStore = Resume & {
   setProjects: (project: Project) => void;
   setLanguages: (language: Language) => void;
   setCertifications: (certification: Certification) => void;
-  setPublications: (publication: Publication) => void;
+  // setPublications: (publication: Publication) => void;
   setResumeId: (resumeId: string) => void;
   //
   deleteExperience: (experienceId: string) => void;
@@ -49,7 +49,7 @@ export type ResumeStore = Resume & {
   deleteProject: (projectId: string) => void;
   deleteLanguage: (languageId: string) => void;
   deleteCertification: (certificationId: string) => void;
-  deletePublication: (publicationId: string) => void;
+  // deletePublication: (publicationId: string) => void;
   deleteResumeId: () => void;
   //
   updateExperience: (experienceId: string, experience: Experience) => void;
@@ -61,5 +61,5 @@ export type ResumeStore = Resume & {
     certificationId: string,
     certification: Certification
   ) => void;
-  updatePublication: (publicationId: string, publication: Publication) => void;
+  // updatePublication: (publicationId: string, publication: Publication) => void;
 };

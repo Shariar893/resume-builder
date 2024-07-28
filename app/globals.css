@@ -163,3 +163,13 @@
     rgba(255, 255, 255, 0) 100%
   );
 }
+
+.education-container {
+  width: 100px;
+}
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

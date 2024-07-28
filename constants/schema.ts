@@ -46,11 +46,17 @@ export const ProjectSchema = z.object({
   projectDescription: z.string().optional(),
 });
 
+// export const SkillSchema1 = z.object({
+//   skillId: z.string(),
+//   resumeIdentifier: z.string(),
+//   skillName: z.string(),
+//   level: z.string().optional(),
+// });
 export const SkillSchema = z.object({
   skillId: z.string(),
   resumeIdentifier: z.string(),
-  skillName: z.string(),
-  level: z.string().optional(),
+  skillCategories: z.string(),
+  skillList: z.string(),
 });
 
 export const LanguageSchema = z.object({
@@ -89,4 +95,5 @@ export const ResumeSchema = z.object({
   projects: z.array(ProjectSchema),
   languages: z.array(LanguageSchema),
   certifications: z.array(CertificationSchema),
+  publications: z.array(PublicationSchema).optional(),
 });

@@ -21,6 +21,7 @@ const Project = () => {
     projectName: "",
     deploymentLink: "",
     projectDescription: "",
+    resumeIdentifier: "",
   };
 
   if (selectedProject) {

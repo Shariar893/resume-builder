@@ -26,6 +26,7 @@ const Education = () => {
     eduId: "",
     institutionName: "",
     description: "",
+    resumeIdentifier: "",
   };
 
   if (selectedEducation) {

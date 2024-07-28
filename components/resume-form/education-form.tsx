@@ -28,6 +28,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
 import { ScrollArea } from "../ui/scroll-area";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type EducationFormProps = {
   isOpened: boolean;
@@ -48,6 +50,8 @@ const EducationForm = ({
   mode,
   defaultVal,
 }: EducationFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
   const form = useForm<Education>({
     resolver: zodResolver(EducationSchema),
     defaultValues: defaultVal,
@@ -63,7 +67,7 @@ const EducationForm = ({
         ...data,
       });
     } else {
-      onCreate({ ...data, eduId: uuidv4() });
+      onCreate({ ...data, eduId: uuidv4(), resumeIdentifier: pathName });
     }
     setIsOpened(false);
   }

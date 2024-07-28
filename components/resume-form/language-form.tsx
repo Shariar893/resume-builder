@@ -32,6 +32,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type languageFormProps = {
   isOpened: boolean;
@@ -52,6 +54,8 @@ const LanguageForm = ({
   mode,
   defaultVal,
 }: languageFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
   const form = useForm<Language>({
     resolver: zodResolver(LanguageSchema),
   });
@@ -66,7 +70,7 @@ const LanguageForm = ({
         ...data,
       });
     } else {
-      onCreate({ ...data, languageId: uuidv4() });
+      onCreate({ ...data, languageId: uuidv4(), resumeIdentifier: pathName });
     }
     setIsOpened(false);
   }

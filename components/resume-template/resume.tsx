@@ -5,9 +5,12 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import Draggable from "react-draggable";
 import ResumeToolKit from "./resume-tool-kit";
 import MyResume from "./resume-template";
+import useResumeStore from "@/store/resumeStore";
+import { ResumeComponent } from "./resume-template-3";
 
 const Resume = () => {
   const resumeRef = useRef(null);
+  const resumeData = useResumeStore();
 
   return (
     <div className="p-4 relative w-full">
@@ -38,7 +41,8 @@ const Resume = () => {
                     transformOrigin: "top left",
                   }}
                 >
-                  <MyResume />
+                  {/* <MyResume /> */}
+                  <ResumeComponent {...resumeData} />
                 </div>
               </Draggable>
             </TransformComponent>

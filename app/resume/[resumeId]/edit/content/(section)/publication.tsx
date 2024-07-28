@@ -24,6 +24,7 @@ const Publication = ({ isLast = false }: { isLast: boolean | undefined }) => {
     publicationDescription: "",
     publicationLink: "",
     publicationPublisher: "",
+    resumeIdentifier: "",
   };
 
   if (selectedPublication) {

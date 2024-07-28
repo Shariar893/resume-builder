@@ -12,4 +12,5 @@ export const defaultProfile: Profile = {
   role: "UX DESIGNER",
   summary:
     "UX Designer with a focus on delivering impactful results, eager to tackle dynamic challenges and apply creativity to craft intuitive user experiences. I have demonstrated proficiency in project management, user-centric problem-solving, and seamless collaboration across teams.",
+  resumeIdentifier: "",
 };

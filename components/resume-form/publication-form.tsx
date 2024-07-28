@@ -27,6 +27,8 @@ import { Input } from "@/components/ui/input";
 
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type PublicationFormProps = {
   isOpened: boolean;
@@ -47,6 +49,8 @@ const PublicationForm = ({
   mode,
   defaultVal,
 }: PublicationFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
   const form = useForm<Publication>({
     resolver: zodResolver(PublicationSchema),
     defaultValues: defaultVal,
@@ -64,7 +68,11 @@ const PublicationForm = ({
         ...data,
       });
     } else {
-      onCreate({ ...data, publicationId: uuidv4() });
+      onCreate({
+        ...data,
+        publicationId: uuidv4(),
+        resumeIdentifier: pathName,
+      });
     }
     setIsOpened(false);
   }

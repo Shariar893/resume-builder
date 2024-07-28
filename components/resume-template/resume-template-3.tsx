@@ -1,17 +1,18 @@
+import { Resume as ResumeType } from "@/constants/types";
 import { seperateDes } from "@/lib/seperate-des";
-import useResumeStore from "@/store/resumeStore";
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
 import { Github, Globe, Linkedin, Mail, Phone } from "lucide-react";
-const MyResume = () => {
-  const profile = useResumeStore((state) => state.profile);
-  const educations = useResumeStore((state) => state.educations);
-  const projects = useResumeStore((state) => state.projects);
-  const skills = useResumeStore((state) => state.skills);
-  const experiences = useResumeStore((state) => state.experiences);
-  const certifications = useResumeStore((state) => state.certifications);
 
+export const ResumeComponent = ({
+  profile,
+  educations,
+  projects,
+  skills,
+  experiences,
+  certifications,
+}: ResumeType) => {
   return (
     <div className="w-[210mm] h-[297mm] mx-auto p-8 bg-white text-black shadow-lg overflow-hidden text-[11px] leading-tight print:shadow-none">
       <div className="flex flex-col h-full">
@@ -177,4 +178,20 @@ const MyResume = () => {
     </div>
   );
 };
-export default MyResume;
+
+export const renderToString = async (data: ResumeType): Promise<string> => {
+  if (typeof window === "undefined") {
+    // Server-side rendering
+    const ReactDOMServer = (await import("react-dom/server")).default;
+    return ReactDOMServer.renderToString(<ResumeComponent {...data} />);
+  } else {
+    // Client-side rendering
+    const root = document.createElement("div");
+    const ReactDOM = (await import("react-dom/client")).default;
+    const { renderToString } = await import("react-dom/server");
+    ReactDOM.createRoot(root).render(<ResumeComponent {...data} />);
+    console.log("server");
+
+    return renderToString(<ResumeComponent {...data} />);
+  }
+};

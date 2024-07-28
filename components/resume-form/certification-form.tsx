@@ -27,6 +27,8 @@ import { Input } from "@/components/ui/input";
 
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { usePathname } from "next/navigation";
+import { getIdFromUrl } from "@/lib/utils";
 
 type CertificationFormProps = {
   isOpened: boolean;
@@ -47,6 +49,8 @@ const CertificationForm = ({
   mode,
   defaultVal,
 }: CertificationFormProps) => {
+  let pathName = usePathname();
+  pathName = getIdFromUrl(pathName);
   const form = useForm<Certification>({
     resolver: zodResolver(CertificationSchema),
     defaultValues: defaultVal,
@@ -64,7 +68,11 @@ const CertificationForm = ({
         ...data,
       });
     } else {
-      onCreate({ ...data, certificationId: uuidv4() });
+      onCreate({
+        ...data,
+        certificationId: uuidv4(),
+        resumeIdentifier: pathName,
+      });
     }
     setIsOpened(false);
   }
@@ -73,7 +81,9 @@ const CertificationForm = ({
     <div className="max-w-[550px]">
       <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
-          <ModelHeader className="font-semibold">Education Section</ModelHeader>
+          <ModelHeader className="font-semibold">
+            Certification Section
+          </ModelHeader>
           <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
             <Form {...form}>
               <form
@@ -115,11 +125,11 @@ const CertificationForm = ({
                   )}
                 />
 
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="date"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2">
                       <FormLabel>Issued Date</FormLabel>
                       <FormControl>
                         <Input
@@ -131,13 +141,13 @@ const CertificationForm = ({
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> */}
 
                 <FormField
                   control={form.control}
                   name="certificationProof"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2">
                       <FormLabel>Certification Proof</FormLabel>
                       <FormControl>
                         <Input
@@ -151,7 +161,7 @@ const CertificationForm = ({
                   )}
                 />
 
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="description"
                   render={({ field }) => (
@@ -167,7 +177,7 @@ const CertificationForm = ({
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> */}
                 <ModelFooter className="p-0 col-span-2">
                   <Button type="submit" className="w-full mt-2 ">
                     Save changes

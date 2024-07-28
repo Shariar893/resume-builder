@@ -28,6 +28,7 @@ const Certification = () => {
     certificationProof: "",
     description: "",
     date: "",
+    resumeIdentifier: "",
   };
 
   if (selectedCertification) {
