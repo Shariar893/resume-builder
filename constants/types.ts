@@ -16,7 +16,7 @@ export type Skill = z.infer<typeof SkillSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
 export type Language = z.infer<typeof LanguageSchema>;
 export type Certification = z.infer<typeof CertificationSchema>;
-// export type Publication = z.infer<typeof PublicationSchema>;
+export type Publication = z.infer<typeof PublicationSchema>;
 export type Resume = {
   profile: Profile | undefined;
   experiences: Experience[];

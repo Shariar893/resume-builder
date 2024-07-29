@@ -7,7 +7,7 @@ import Project from "./(section)/project";
 import Skill from "./(section)/skill";
 import Language from "./(section)/language";
 import Certification from "./(section)/certification";
-import Publication from "./(section)/publication";
+// import Publication from "./(section)/publication";
 
 const EditResume = ({}) => {
   return (
