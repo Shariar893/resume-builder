@@ -83,13 +83,13 @@ const ExperienceForm = ({
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full md:px-1 mb-2 md:mb-1 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 md:max-h-[80vh]"
+                className="w-full md:px-1 mb-2 md:mb-1 grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-4 md:max-h-[80vh]"
               >
                 <FormField
                   control={form.control}
                   name="company"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-2 md:col-span-1">
                       <FormLabel>Company Name</FormLabel>
                       <FormControl>
                         <Input
@@ -106,7 +106,7 @@ const ExperienceForm = ({
                   control={form.control}
                   name="role"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Role</FormLabel>
                       <FormControl>
                         <Input
@@ -124,7 +124,7 @@ const ExperienceForm = ({
                   control={form.control}
                   name="startDate"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Start Date</FormLabel>
                       <FormControl>
                         <Input
@@ -142,7 +142,7 @@ const ExperienceForm = ({
                   control={form.control}
                   name="endDate"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full  col-span-2 md:col-span-1">
                       <FormLabel>End Date</FormLabel>
                       <FormControl>
                         <Input

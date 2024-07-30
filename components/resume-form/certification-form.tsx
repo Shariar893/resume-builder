@@ -87,13 +87,13 @@ const CertificationForm = ({
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full md:px-1 mb-2 md:mb-1 grid gap-4 "
+                className="w-full md:px-1 mb-2 md:mb-1 grid gap-4 grid-cols-2"
               >
                 <FormField
                   control={form.control}
                   name="certificationName"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-2 ">
                       <FormLabel>Certificate Name</FormLabel>
                       <FormControl>
                         <Input
@@ -110,7 +110,7 @@ const CertificationForm = ({
                   control={form.control}
                   name="certificationAuthority"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Authority</FormLabel>
                       <FormControl>
                         <Input
@@ -146,7 +146,7 @@ const CertificationForm = ({
                   control={form.control}
                   name="certificationProof"
                   render={({ field }) => (
-                    <FormItem className="w-full md:col-span-2">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Certification Proof</FormLabel>
                       <FormControl>
                         <Input

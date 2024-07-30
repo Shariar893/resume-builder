@@ -80,7 +80,7 @@ const ProjectForm = ({
       <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
         <ModelContent>
           <ModelHeader className="font-semibold text-xl">
-            Experience Section
+            Project Section
           </ModelHeader>
           <ModelBody className="max-h-screen overflow-y-scroll scrollbar-none">
             <Form {...form}>
@@ -109,7 +109,7 @@ const ProjectForm = ({
                   control={form.control}
                   name="deploymentLink"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Live Link</FormLabel>
                       <FormControl>
                         <Input
@@ -127,7 +127,7 @@ const ProjectForm = ({
                   control={form.control}
                   name="repoLink"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="w-full col-span-2 md:col-span-1">
                       <FormLabel>Github Link</FormLabel>
                       <FormControl>
                         <Input

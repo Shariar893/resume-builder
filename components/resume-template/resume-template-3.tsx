@@ -359,21 +359,21 @@ export const ResumeComponent = ({
         <header className="text-center mb-4">
           <h1 className="text-3xl font-bold mb-1">{profile?.name}</h1>
           <p className="text-lg">{profile?.address}</p>
-          <div className="flex justify-center space-x-5 mt-1">
+          <div className="flex justify-center items-center space-x-5 mt-1">
             {profile?.phone && (
               <a
                 href={`tel:${profile?.phone}`}
                 className="flex items-center text-blue-600 hover:underline"
               >
-                <Phone className="mr-1 h-3 w-3" /> {profile?.phone}
+                <Phone className="mr-1 h-4 w-4" /> {profile?.phone}
               </a>
             )}
             {profile?.email && (
               <a
                 href={`mailto:${profile?.email}`}
-                className="flex items-center text-blue-600 hover:underline"
+                className="flex items-center justify-center text-blue-600 hover:underline"
               >
-                <Mail className="mr-1 h-3 w-3" /> {profile?.email}
+                <Mail className="mr-1 h-4 w-4" /> {profile?.email}
               </a>
             )}
             {profile?.linkedin && (
@@ -381,7 +381,7 @@ export const ResumeComponent = ({
                 href={profile?.linkedin}
                 className="flex items-center text-blue-600 hover:underline"
               >
-                <Linkedin className="mr-1 h-3 w-3" /> LinkedIn
+                <Linkedin className="mr-1 h-4 w-4" /> LinkedIn
               </a>
             )}
             {profile?.github && (
@@ -389,7 +389,7 @@ export const ResumeComponent = ({
                 href={profile?.github}
                 className="flex items-center text-blue-600 hover:underline"
               >
-                <Github className="mr-1 h-3 w-3" /> Github
+                <Github className="mr-1 h-4 w-4" /> Github
               </a>
             )}
             {profile?.website && (
@@ -397,7 +397,7 @@ export const ResumeComponent = ({
                 href={profile?.website}
                 className="flex items-center text-blue-600 hover:underline"
               >
-                <Globe className="mr-1 h-3 w-3" /> Website
+                <Globe className="mr-1 h-4 w-4" /> Website
               </a>
             )}
           </div>
