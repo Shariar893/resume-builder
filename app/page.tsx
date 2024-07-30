@@ -4,18 +4,17 @@ import BlurText from "@/components/ui/blur-text";
 import Image from "next/image";
 import Link from "next/link";
 import HeroSectionBackground from "./hero-section-background";
-import { Heart } from "lucide-react";
 
 const Page = () => {
   return (
-    <div>
+    <main className="flex flex-col min-h-screen">
       <div className="absolute top-0 z-[-2] h-full w-full bg-[radial-gradient(ellipse_60%_150%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
       <HeroSectionBackground />
 
       <Header />
       <BlurText>
-        <main className="px-4 mt-10 flex flex-col items-center gap-6 w-full overflow-hidden mb-20">
-          <h1 className="text-center font-space-grotesk font-semibold bg-gradient-to-br bg-clip-text leading-none tracking-tighter text-transparent from-white from-5% to-white/40 text-3xl sm:text-5xl md:text-6xl">
+        <div className="px-4 mt-10 flex-grow flex flex-col items-center gap-6 w-full overflow-hidden mb-20">
+          <h1 className="text-center font-space-grotesk font-semibold  leading-none tracking-tighter bg-gradient-to-br bg-clip-text text-transparent from-white from-5% to-white/40 text-3xl sm:text-5xl md:text-6xl">
             Create Your Professional <br /> Resume in Minutes
           </h1>
           <p className="text-center text-xs sm:text-base text-pretty text-secondary-foreground font-space-grotesk font-light">
@@ -44,7 +43,7 @@ const Page = () => {
             />
             <div className="hero-image rounded-xl" />
           </div>
-        </main>
+        </div>
       </BlurText>
 
       {/* <div className="mt-28">
@@ -76,7 +75,7 @@ const Page = () => {
           </Link>
         </span>
       </footer> */}
-    </div>
+    </main>
   );
 };
 
