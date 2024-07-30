@@ -13,7 +13,6 @@ import {
   ModelFooter,
   ModelHeader,
 } from "@/components/responsive-model";
-import TextEditor from "@/components/TextEditor";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -25,10 +24,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { getIdFromUrl } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { usePathname } from "next/navigation";
-import { getIdFromUrl } from "@/lib/utils";
 
 type CertificationFormProps = {
   isOpened: boolean;
@@ -88,7 +87,7 @@ const CertificationForm = ({
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full md:px-1 mb-2 md:mb-1 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4"
+                className="w-full md:px-1 mb-2 md:mb-1 grid gap-4 "
               >
                 <FormField
                   control={form.control}
@@ -147,7 +146,7 @@ const CertificationForm = ({
                   control={form.control}
                   name="certificationProof"
                   render={({ field }) => (
-                    <FormItem className="w-full col-span-2">
+                    <FormItem className="w-full md:col-span-2">
                       <FormLabel>Certification Proof</FormLabel>
                       <FormControl>
                         <Input

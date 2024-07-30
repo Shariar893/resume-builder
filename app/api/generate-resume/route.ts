@@ -618,10 +618,10 @@ export async function POST(req: NextRequest) {
       <!-- Education -->
       ${
         body.educations.length > 0
-          ? `<section class="mb-3.5"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Education</h2>${body.educations
+          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Education</h2>${body.educations
               .map(
                 (edu: any, index: number) =>
-                  `<div key=${index} class="mb-1"><div class="flex justify-between"><h3 class="font-semibold text-lg">${edu.institutionName}</h3><span class="text-sm">${edu.startDate} - ${edu.endDate}</span></div><p class="text-sm">${edu.degree} - ${edu.fieldOfStudy} - CGPA: ${edu.score}</p><ul class="list-disc pl-5 text-sm">${edu.description}</ul></div>`
+                  `<div key=${index} class="mb-3"><div class="flex justify-between"><h3 class="font-semibold text-lg">${edu.institutionName}</h3><span class="text-sm">${edu.startDate} - ${edu.endDate}</span></div><p class="text-sm">${edu.degree} - ${edu.fieldOfStudy} - CGPA: ${edu.score}</p><ul class="list-disc pl-5 text-sm">${edu.description}</ul></div>`
               )
               .join("")}</section>`
           : ""
@@ -630,12 +630,12 @@ export async function POST(req: NextRequest) {
       <!-- Projects -->
       ${
         body.projects.length > 0
-          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-1 uppercase">Projects</h2>${body.projects
+          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Projects</h2>${body.projects
               .map(
                 (project: any) =>
                   `<div key=${
                     project.projectId
-                  } class="mb-2><div class="flex justify-between"><h3 class="font-semibold text-lg">${
+                  } class="mb-3"><div class="flex justify-between"><h3 class="font-semibold text-lg">${
                     project.projectName
                   }</h3></div><p class="italic text-sm">${
                     project.deploymentLink
@@ -661,7 +661,7 @@ export async function POST(req: NextRequest) {
       <!-- Experiences -->
       ${
         body.experiences.length > 0
-          ? `<section class="mb-2"><h2 class="text-xl font-bold border-b border-gray-300 mb-1 uppercase">Experience</h2>${body.experiences
+          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Experience</h2>${body.experiences
               .map(
                 (experience: any) =>
                   `<div key=${
@@ -674,7 +674,7 @@ export async function POST(req: NextRequest) {
                     experience.role
                       ? `<p class="text-sm">${experience.role}</p>`
                       : ""
-                  }<ul class="list-disc pl-5">${extractParagraphs(
+                  }<ul class="list-disc pl-5 text-sm">${extractParagraphs(
                     experience.description
                   )
                     .map(
@@ -690,7 +690,7 @@ export async function POST(req: NextRequest) {
       <!-- Skills -->
       ${
         body.skills.length > 0
-          ? `<section class="mb-2"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Skills</h2>${body.skills
+          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Skills</h2>${body.skills
               .map(
                 (skill: any) =>
                   `<div key=${skill.skillId} class="text-sm"><span class="font-semibold">${skill.skillCategories} :</span> ${skill.skillList}</div>`
@@ -702,7 +702,7 @@ export async function POST(req: NextRequest) {
       <!-- Certifications -->
       ${
         body.certifications.length > 0
-          ? `<section class="mb-2"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Certifications</h2><ul class="mb-2 list-disc pl-3 text-sm">${body.certifications
+          ? `<section class="mb-3"><h2 class="text-xl font-bold border-b border-gray-300 mb-2 uppercase">Certifications</h2><ul class="mb-2 list-disc pl-3 text-sm">${body.certifications
               .map(
                 (certification: any, index: number) =>
                   `<li key=${index}><a class="font-semibold text-blue-600 hover:underline" href=${certification.certificationProof}>${certification.certificationName}</a> by <span class="capitalize">${certification.certificationAuthority}</span></li>`
