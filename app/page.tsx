@@ -7,13 +7,13 @@ import HeroSectionBackground from "./hero-section-background";
 
 const Page = () => {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="">
       <div className="absolute top-0 z-[-2] h-full w-full bg-[radial-gradient(ellipse_60%_150%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
       <HeroSectionBackground />
 
       <Header />
       <BlurText>
-        <div className="px-4 mt-10 flex-grow flex flex-col items-center gap-6 w-full overflow-hidden mb-20">
+        <div className="px-4 mt-10 flex flex-col items-center gap-6 w-full overflow-hidden mb-8">
           <h1 className="text-center font-space-grotesk font-semibold  leading-none tracking-tighter bg-gradient-to-br bg-clip-text text-transparent from-white from-5% to-white/40 text-3xl sm:text-5xl md:text-6xl">
             Create Your Professional <br /> Resume in Minutes
           </h1>
