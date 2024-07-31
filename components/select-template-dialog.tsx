@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import img1 from "@/public/resume-templates/001.jpg";
+import img1 from "@/public/resume-templates/001.png";
 import useResumeStore from "@/store/resumeStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,10 +33,6 @@ const images = [
   { src: img1, id: 2 },
   { src: img1, id: 3 },
   { src: img1, id: 4 },
-  { src: img1, id: 5 },
-  { src: img1, id: 6 },
-  { src: img1, id: 7 },
-  { src: img1, id: 8 },
 ];
 
 const SelectDialog = () => {
@@ -81,7 +77,7 @@ const SelectDialog = () => {
             Choose Your Template
           </ModelTitle>
           <div className="sm:px-4">
-            <Select>
+            <Select disabled>
               <SelectTrigger className="text-base mx-auto sm:max-w-[280px] sm:mx-0">
                 <SelectValue placeholder="Job Type" />
               </SelectTrigger>
