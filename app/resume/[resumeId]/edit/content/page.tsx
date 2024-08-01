@@ -14,7 +14,7 @@ const EditResume = ({}) => {
     <>
       <div className="flex w-full xl:max-w-5xl">
         <ScrollArea className="h-screen w-full ">
-          <div className="space-y-6 p-4 md:w-[45vw] xl:w-full mb-20 md:mb-0">
+          <div className="space-y-6 p-4 md:w-[45vw] xl:w-full mb-24 md:mb-0">
             <ProfileForm />
             <Education />
             <Experience />

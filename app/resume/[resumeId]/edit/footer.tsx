@@ -10,7 +10,7 @@ const Footer = () => {
   const pathname = getCurrentPath(usePathname());
   return (
     <footer className="md:hidden absolute bottom-0 w-full border-t border-t-primary-foreground bg-[#09090b]">
-      <ul className="flex items-center justify-between px-12 max-w-[400px] mx-auto ">
+      <ul className="flex items-center justify-between px-12 max-w-[400px] mx-auto">
         <li>
           <Link
             href="content"
