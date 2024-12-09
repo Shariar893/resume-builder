@@ -422,7 +422,10 @@ export const ResumeComponent = ({
                 <p className="text-sm">
                   {edu.degree} - {edu.fieldOfStudy} - CGPA: {edu.score}
                 </p>
-                <p>{edu.description}</p>
+                {/* {edu.description} */}
+                {edu.description && parse(DOMPurify.sanitize(edu.description))}
+
+                {/* <p>{edu.description}</p> */}
               </div>
             ))}
           </section>

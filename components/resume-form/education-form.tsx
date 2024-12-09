@@ -71,6 +71,7 @@ const EducationForm = ({
     }
     setIsOpened(false);
   }
+
   return (
     <div className="max-w-[500px]">
       <Model open={isOpened} onOpenChange={(val) => setIsOpened(val)}>
@@ -202,9 +203,19 @@ const EducationForm = ({
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <TextEditor
-                          disabled={field.disabled!}
-                          value={field.value!}
-                          fieldName={field.name}
+                          // disabled={field.disabled!}
+                          // value={field.value!}
+                          // fieldName={field.name}
+                          extensions={[
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "bulletList",
+                            "orderedList",
+                          ]}
+                          onContentChange={field.onChange}
+                          value={field.value}
                         />
                       </FormControl>
                       <FormMessage />

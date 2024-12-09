@@ -4,6 +4,8 @@ import BlurText from "@/components/ui/blur-text";
 import Image from "next/image";
 import Link from "next/link";
 import HeroSectionBackground from "./hero-section-background";
+import ShinyButton from "@/components/ShinyButton";
+import { ArrowRight } from "lucide-react";
 
 const Page = () => {
   return (
@@ -22,7 +24,14 @@ const Page = () => {
             creates ATS-friendly resumes in minutes, not hours.
           </p>
 
-          <SelectDialog />
+          {/* <SelectDialog /> */}
+
+          <Link href="/dashboard">
+            <ShinyButton>
+              Start Building
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </ShinyButton>
+          </Link>
 
           <div
             style={{
