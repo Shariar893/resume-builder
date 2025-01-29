@@ -12,7 +12,6 @@ const useResumeStore = create<ResumeStore>()(
       projects: [],
       languages: [],
       certifications: [],
-      // publications: [],
       resumeId: null,
       setProfile: (profileFieldName, profileFieldValue) =>
         set((state) => ({
@@ -41,10 +40,6 @@ const useResumeStore = create<ResumeStore>()(
         set((state) => ({
           certifications: [...state.certifications, certification],
         })),
-      // setPublications: (publication) =>
-      //   set((state) => ({
-      //     publications: [...state.publications!, publication],
-      //   })),
 
       deleteResumeId: () => set({ resumeId: null }),
       deleteEducation: (educationId) =>
@@ -82,12 +77,6 @@ const useResumeStore = create<ResumeStore>()(
             (certification) => certification.certificationId !== certificationId
           ),
         })),
-      // deletePublication: (publicationId) =>
-      //   set((state) => ({
-      //     publications: state.publications?.filter(
-      //       (publication) => publication.publicationId !== publicationId
-      //     ),
-      //   })),
 
       updateEducation: (educationId, education) =>
         set((state) => ({
@@ -125,12 +114,6 @@ const useResumeStore = create<ResumeStore>()(
             cer.certificationId === certificationId ? certification : cer
           ),
         })),
-      // updatePublication: (publicationId, publication) =>
-      //   set((state) => ({
-      //     publications: state.publications?.map((pub) =>
-      //       pub.publicationId === publicationId ? publication : pub
-      //     ),
-      //   })),
     }),
     { name: "salke" }
   )
